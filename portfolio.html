@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오 갤러리</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            padding: 20px;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .upload-section {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #404040;
+        }
+
+        .upload-area {
+            border: 2px dashed #666;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #888;
+            background: #333;
+        }
+
+        .upload-area.dragover {
+            border-color: #4CAF50;
+            background: #2a2a2a;
+        }
+
+        .upload-text {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: #45a049;
+        }
+
+        .gallery {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            background: #2a2a2a;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 1px solid #404040;
+            overflow: hidden;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photo-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            opacity: 1;
+        }
+
+        .comment-section {
+            padding: 0 20px 20px 20px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        .comment-input::placeholder {
+            color: #888;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .photo-counter {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .upload-section {
+                padding: 20px;
+            }
+
+            .photo-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>이석현</h1>
+        <div class="subtitle">Korea IT Academy Security Solution</div>
+        
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    파일 선택
+                </button>
+                <input type="file" id="fileInput" accept="image/*" multiple>
+            </div>
+        </div>
+
+        <div class="photo-counter" id="photoCounter">
+            업로드된 사진: 0개
+        </div>
+
+        <div class="gallery" id="gallery"></div>
+    </div>
+
+    <script>
+        let photoCount = 0;
+        const gallery = document.getElementById('gallery');
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const photoCounter = document.getElementById('photoCounter');
+
+        // 파일 업로드 처리
+        fileInput.addEventListener('change', handleFiles);
+
+        // 드래그 앤 드롭 기능
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('drop', handleDrop);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleFiles({target: {files: files}});
+        }
+
+        function handleFiles(event) {
+            const files = event.target.files;
+            
+            for (let file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        createPhotoCard(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        function createPhotoCard(imageSrc) {
+            photoCount++;
+            updatePhotoCounter();
+
+            const photoCard = document.createElement('div');
+            photoCard.className = 'photo-card';
+            photoCard.innerHTML = `
+                <div class="photo-container">
+                    <img src="${imageSrc}" alt="Portfolio Image" class="photo-img">
+                    <button class="delete-btn" onclick="deletePhoto(this)">×</button>
+                </div>
+                <div class="comment-section">
+                    <textarea class="comment-input" placeholder="프로젝트 설명, 사용 기술, 특징 등을 입력하세요..."></textarea>
+                </div>
+            `;
+            
+            gallery.appendChild(photoCard);
+        }
+
+        function updateComment(textarea) {
+            // 블로그 스타일이므로 실시간 업데이트 제거
+        }
+
+        function deletePhoto(button) {
+            if (confirm('이 사진을 삭제하시겠습니까?')) {
+                const photoCard = button.closest('.photo-card');
+                photoCard.style.transform = 'scale(0)';
+                photoCard.style.opacity = '0';
+                
+                setTimeout(() => {
+                    photoCard.remove();
+                    photoCount--;
+                    updatePhotoCounter();
+                }, 300);
+            }
+        }
+
+        function updatePhotoCounter() {
+            photoCounter.textContent = `업로드된 사진: ${photoCount}개`;
+        }
+
+        // 초기 샘플 이미지 (선택사항)
+        window.addEventListener('load', function() {
+            // 샘플 이미지를 추가하고 싶다면 여기에 코드 추가
+        });
+    </script>
+</body>
+</html>
