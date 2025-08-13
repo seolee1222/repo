@@ -79,14 +79,15 @@
             display: none;
         }
 
+        /* ✅ 작은 파일 선택 버튼 스타일 */
         .upload-btn {
             background: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 25px;
+            padding: 5px 12px; /* 작게 */
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem; /* 더 작게 */
             transition: background 0.3s ease;
         }
 
@@ -143,6 +144,22 @@
 
         .comment-section {
             padding: 0 20px 20px 20px;
+        }
+
+        /* ✅ 제목 입력창 스타일 */
+        .title-input {
+            margin-bottom: 12px;
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #404040;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-size: 15px;
+        }
+
+        .title-input::placeholder {
+            color: #888;
         }
 
         .comment-input {
@@ -223,10 +240,7 @@
         const uploadArea = document.getElementById('uploadArea');
         const photoCounter = document.getElementById('photoCounter');
 
-        // 파일 업로드 처리
         fileInput.addEventListener('change', handleFiles);
-
-        // 드래그 앤 드롭 기능
         uploadArea.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('dragover', handleDragOver);
         uploadArea.addEventListener('drop', handleDrop);
@@ -251,7 +265,6 @@
 
         function handleFiles(event) {
             const files = event.target.files;
-            
             for (let file of files) {
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
@@ -275,15 +288,11 @@
                     <button class="delete-btn" onclick="deletePhoto(this)">×</button>
                 </div>
                 <div class="comment-section">
+                    <input type="text" class="title-input" placeholder="제목을 입력하세요...">
                     <textarea class="comment-input" placeholder="프로젝트 설명, 사용 기술, 특징 등을 입력하세요..."></textarea>
                 </div>
             `;
-            
             gallery.appendChild(photoCard);
-        }
-
-        function updateComment(textarea) {
-            // 블로그 스타일이므로 실시간 업데이트 제거
         }
 
         function deletePhoto(button) {
@@ -303,11 +312,6 @@
         function updatePhotoCounter() {
             photoCounter.textContent = `업로드된 사진: ${photoCount}개`;
         }
-
-        // 초기 샘플 이미지 (선택사항)
-        window.addEventListener('load', function() {
-            // 샘플 이미지를 추가하고 싶다면 여기에 코드 추가
-        });
     </script>
 </body>
 </html>
