@@ -209,7 +209,7 @@
     <nav class="nav">
         <div class="container">
             <div class="nav-content">
-                <a href="../index.html" class="back-btn">← 홈으로 돌아가기</a>
+                <a href="../portfolio.html" class="back-btn">← 홈으로 돌아가기</a>
                 <div></div>
             </div>
         </div>
@@ -244,9 +244,9 @@
                 <p>이번 실습에서는 다음과 같은 환경에서 Zabbix를 설치하겠습니다:</p>
                 <ul>
                     <li>OS: Ubuntu 22.04 LTS</li>
-                    <li>Database: MySQL 8.0</li>
-                    <li>Web Server: Apache 2.4</li>
-                    <li>PHP: 8.1</li>
+                    <li>Database: MARIADB</li>
+                    <li>Web Server: Apache 2</li>
+                    <li>PHP: 8.3</li>
                 </ul>
 
                 <h2>📥 설치 과정</h2>
@@ -274,9 +274,9 @@ sudo apt update</code></pre>
                 
                 <pre><code>mysql -u root -p
 
-CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost';
+CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin; // 자빅스 데이터 베이스에 chaeacter set utf8로 하겠다
+CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'password'; // 유저생성 및 비밀번호주기
+GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost'; //모든권한을 주겠다
 FLUSH PRIVILEGES;
 EXIT;</code></pre>
 
