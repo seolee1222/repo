@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMS(Network Management System) Zabbix구축 - My Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="25" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="25" cy="75" r="0.8" fill="rgba(255,255,255,0.06)"/><circle cx="75" cy="75" r="1.2" fill="rgba(255,255,255,0.09)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Article */
+        .article {
+            background: white;
+            margin: 2rem 0;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .article-content h2 {
+            color: #333;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.5rem;
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .article-content code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .article-content pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .article-content ul, .article-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .article {
+                padding: 2rem 1rem;
+                margin: 1rem 0;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="blog-title">My Development Blog</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="back-btn">← 홈으로 돌아가기</a>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <div class="container">
+        <article class="article">
+            <div class="article-header">
+                <h1 class="article-title">NMS(Network Management System) Zabbix구축</h1>
+            </div>
+            
+            <div class="article-image">
+                🖥️ NMS 네트워크 관리 시스템
+            </div>
+
+            <div class="article-content">
+                <p>이번 포스트에서는 <strong>Network Management System(NMS)</strong>인 Zabbix를 구축하는 방법에 대해 자세히 알아보겠습니다.</p>
+
+                <h2>📋 Zabbix란?</h2>
+                <p>Zabbix는 오픈 소스 네트워크 모니터링 솔루션으로, 서버, 네트워크 장비, 애플리케이션의 성능을 실시간으로 모니터링할 수 있는 강력한 도구입니다.</p>
+
+                <h2>🚀 주요 특징</h2>
+                <ul>
+                    <li><strong>실시간 모니터링</strong>: 네트워크 장비와 서버의 상태를 실시간으로 감시</li>
+                    <li><strong>알림 시스템</strong>: 문제 발생 시 이메일, SMS 등으로 즉시 알림</li>
+                    <li><strong>데이터 시각화</strong>: 그래프와 대시보드를 통한 직관적인 데이터 표현</li>
+                    <li><strong>자동 검색</strong>: 네트워크 장비 자동 검색 및 등록</li>
+                </ul>
+
+                <h2>🛠️ 설치 환경</h2>
+                <p>이번 실습에서는 다음과 같은 환경에서 Zabbix를 설치하겠습니다:</p>
+                <ul>
+                    <li>OS: Ubuntu 22.04 LTS</li>
+                    <li>Database: MySQL 8.0</li>
+                    <li>Web Server: Apache 2.4</li>
+                    <li>PHP: 8.1</li>
+                </ul>
+
+                <h2>📥 설치 과정</h2>
+                
+                <h3>1. 패키지 업데이트</h3>
+                <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+
+                <h3>2. MySQL 설치 및 설정</h3>
+                <pre><code>sudo apt install mysql-server -y
+sudo mysql_secure_installation</code></pre>
+
+                <h3>3. Apache 및 PHP 설치</h3>
+                <pre><code>sudo apt install apache2 php php-mysql php-gd php-xml php-bcmath php-mbstring -y</code></pre>
+
+                <h3>4. Zabbix 저장소 추가</h3>
+                <pre><code>wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb
+sudo dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb
+sudo apt update</code></pre>
+
+                <h3>5. Zabbix 서버 설치</h3>
+                <pre><code>sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y</code></pre>
+
+                <h2>🔧 데이터베이스 설정</h2>
+                <p>MySQL에서 Zabbix 전용 데이터베이스를 생성하고 초기 스키마를 가져옵니다:</p>
+                
+                <pre><code>mysql -u root -p
+
+CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;</code></pre>
+
+                <h2>📊 웹 인터페이스 설정</h2>
+                <p>Zabbix 웹 인터페이스에 접속하여 초기 설정을 완료합니다. 브라우저에서 <code>http://your-server-ip/zabbix</code>로 접속하면 설정 마법사가 시작됩니다.</p>
+
+                <h2>✅ 결론</h2>
+                <p>Zabbix를 성공적으로 구축했습니다! 이제 네트워크 인프라를 효율적으로 모니터링할 수 있습니다. 다음 포스트에서는 Zabbix 에이전트 설정과 모니터링 템플릿 생성에 대해 다루겠습니다.</p>
+            </div>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 My Development Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
