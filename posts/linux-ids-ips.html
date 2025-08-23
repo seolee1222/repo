@@ -12,135 +12,125 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            color: #1a1a1a;
+            background: #ffffff;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
+            background: #ffffff;
+            color: #333;
+            padding: 1.5rem 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="25" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="25" cy="75" r="0.8" fill="rgba(255,255,255,0.06)"/><circle cx="75" cy="75" r="1.2" fill="rgba(255,255,255,0.09)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
+            z-index: 100;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .blog-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #333;
         }
 
         /* Navigation */
         .nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #ffffff;
             padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .back-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
             font-weight: 500;
             transition: all 0.3s ease;
+            display: inline-block;
         }
 
         .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: #555;
+            transform: translateY(-1px);
         }
 
         /* Tab Navigation */
         .tab-nav {
             display: flex;
             gap: 0;
-            margin: 2rem 0;
-            background: white;
-            border-radius: 15px;
+            margin: 0 0 2rem 0;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .tab-btn {
             flex: 1;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             background: none;
             border: none;
             cursor: pointer;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            color: #666;
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
         }
 
         .tab-btn:not(.active):hover {
-            background: #f8f9fa;
+            background: #f5f5f5;
+            color: #333;
         }
 
         /* Tab Content */
         .tab-content {
             display: none;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         .tab-content.active {
             display: block;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Article */
         .article {
-            background: white;
-            margin: 2rem 0;
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: #ffffff;
+            margin: 0 0 2rem 0;
+            padding: 3rem 2.5rem;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
         }
 
         .article-header {
             text-align: center;
             margin-bottom: 3rem;
             padding-bottom: 2rem;
-            border-bottom: 2px solid #f8f9fa;
+            border-bottom: 2px solid #f0f0f0;
         }
 
         .article-title {
@@ -151,37 +141,38 @@
         }
 
         .article-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            text-align: center;
+            display: none;
         }
 
         .article-content {
             line-height: 1.8;
             font-size: 1.1rem;
+            color: #333;
         }
 
         .article-content h2 {
             color: #333;
-            margin: 2rem 0 1rem 0;
-            font-size: 1.5rem;
-            border-left: 4px solid #667eea;
-            padding-left: 1rem;
+            margin: 2.5rem 0 1.2rem 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .article-content h2::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #333;
+            font-weight: bold;
         }
 
         .article-content h3 {
-            color: #555;
-            margin: 1.5rem 0 0.8rem 0;
-            font-size: 1.2rem;
+            color: #444;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .article-content p {
@@ -191,25 +182,28 @@
 
         .article-content code {
             background: #f8f9fa;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
             font-family: 'Monaco', 'Courier New', monospace;
             font-size: 0.9rem;
+            border: 1px solid #e9ecef;
         }
 
         .article-content pre {
             background: #2d3748;
             color: #e2e8f0;
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow-x: auto;
             margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .article-content pre code {
             background: none;
             padding: 0;
             color: inherit;
+            border: none;
         }
 
         .article-content ul, .article-content ol {
@@ -218,24 +212,23 @@
         }
 
         .article-content li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-left: 4px solid #667eea;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            background: #333;
+            color: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
         }
 
         .warning-box {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 159, 67, 0.1));
-            border-left: 4px solid #ff6b6b;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-            color: #c53030;
+            background: #333;
+            color: white;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
         }
 
         /* Footer */
@@ -250,8 +243,8 @@
         /* Responsive */
         @media (max-width: 768px) {
             .article {
-                padding: 2rem 1rem;
-                margin: 1rem 0;
+                padding: 2rem 1.5rem;
+                margin: 0 0 1rem 0;
             }
             
             .article-title {
@@ -259,8 +252,12 @@
             }
 
             .tab-btn {
-                padding: 0.8rem 1rem;
+                padding: 1rem 1.5rem;
                 font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 15px;
             }
         }
     </style>
@@ -269,19 +266,14 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <h1 class="blog-title">My Development Blog</h1>
-            </div>
+            <h1 class="blog-title">My Development Blog</h1>
         </div>
     </header>
 
     <!-- Navigation -->
     <nav class="nav">
         <div class="container">
-            <div class="nav-content">
-                <a href="../portfolio.html" class="back-btn">← 홈으로 돌아가기</a>
-                <div></div>
-            </div>
+            <a href="../portfolio.html" class="back-btn">← 홈으로 돌아가기</a>
         </div>
     </nav>
 
@@ -298,31 +290,27 @@
                 <div class="article-header">
                     <h1 class="article-title">Snort3 IDS/IPS 설치 가이드</h1>
                 </div>
-                
-                <div class="article-image">
-                    🛡️ Snort3 Linux 기반에서 구현하기
-                </div>
 
                 <div class="article-content">
                     <p>이번 포스트에서는 <strong>Snort3 IDS/IPS</strong>를 Ubuntu/Debian 환경에서 구축하는 방법에 대해 자세히 알아보겠습니다.</p>
 
-                    <h2>📋 Snort3란?</h2>
+                    <h2>Snort3란?</h2>
                     <p>Snort3는 오픈소스 기반의 네트워크 침입 탐지 및 방지 시스템(IDS/IPS)으로, 실시간 트래픽 분석과 패킷 로깅 기능을 제공합니다.</p>
                     
                     <div class="highlight-box">
-                        <strong>💡 주요 특징:</strong><br>
+                        <strong>주요 특징:</strong><br>
                         • 실시간 네트워크 트래픽 분석<br>
                         • 유연한 룰 기반 탐지 엔진<br>
                         • 다양한 출력 플러그인 지원<br>
                         • 고성능 패킷 처리
                     </div>
 
-                    <h2>🛠️ 사전 요구사항 설치</h2>
+                    <h2>사전 요구사항 설치</h2>
                     <p>Snort3 컴파일에 필요한 의존성 패키지들을 설치합니다:</p>
                     
                     <pre><code>apt install build-essential libpcap-dev libpcre3-dev libnet1-dev zlib1g-dev luajit hwloc libdumbnet-dev bison flex liblzma-dev openssl libssl-dev pkg-config libhwloc-dev cmake cpputest libsqlite3-dev uuid-dev libcmocka-dev libnetfilter-queue-dev libmnl-dev autotools-dev libluajit-5.1-dev libunwind-dev libfl-dev -y</code></pre>
 
-                    <h2>📥 libdaq 설치</h2>
+                    <h2>libdaq 설치</h2>
                     <p>Data AcQuisition 라이브러리를 설치합니다:</p>
 
                     <h3>Git 설치 및 소스 다운로드</h3>
@@ -335,7 +323,7 @@ git clone https://github.com/snort3/libdaq.git</code></pre>
 ./configure
 make && make install</code></pre>
 
-                    <h2>⚡ gperftools 설치</h2>
+                    <h2>gperftools 설치</h2>
                     <p>성능 및 메모리 관리 유틸리티를 설치합니다:</p>
 
                     <pre><code>wget https://github.com/gperftools/gperftools/releases/download/gperftools-2.13/gperftools-2.13.tar.gz
@@ -345,12 +333,12 @@ cd gperftools-2.13
 make && make install</code></pre>
 
                     <div class="highlight-box">
-                        <strong>📝 참고:</strong><br>
-                        • <code>make</code>: 소스코드를 컴파일<br>
-                        • <code>make install</code>: 컴파일된 파일을 시스템에 설치
+                        <strong>참고:</strong><br>
+                        • make: 소스코드를 컴파일<br>
+                        • make install: 컴파일된 파일을 시스템에 설치
                     </div>
 
-                    <h2>🔧 Snort3 설치</h2>
+                    <h2>Snort3 설치</h2>
 
                     <h3>소스코드 다운로드</h3>
                     <pre><code>cd ~
@@ -374,7 +362,7 @@ make && make install</code></pre>
                         설치가 성공하면 Snort++ 버전 정보가 출력됩니다.
                     </div>
 
-                    <h2>⚙️ 네트워크 인터페이스 설정</h2>
+                    <h2>네트워크 인터페이스 설정</h2>
 
                     <h3>무작위 모드(Promiscuous Mode) 설정</h3>
                     <pre><code>ip link set dev enp0s3 promisc on</code></pre>
@@ -387,10 +375,10 @@ make && make install</code></pre>
 ethtool -K enp0s3 gro off lro off</code></pre>
 
                     <div class="warning-box">
-                        <strong>⚠️ 주의:</strong> <code>enp0s3</code>를 실제 네트워크 인터페이스명으로 변경하세요.
+                        <strong>주의:</strong> enp0s3를 실제 네트워크 인터페이스명으로 변경하세요.
                     </div>
 
-                    <h2>🚀 시스템 서비스 설정</h2>
+                    <h2>시스템 서비스 설정</h2>
 
                     <h3>서비스 파일 생성</h3>
                     <pre><code>touch /etc/systemd/system/snort3-nic.service
@@ -417,7 +405,7 @@ systemctl start snort3-nic
 systemctl enable snort3-nic
 systemctl status snort3-nic</code></pre>
 
-                    <h2>📜 룰 파일 설정</h2>
+                    <h2>룰 파일 설정</h2>
 
                     <h3>룰 디렉터리 생성</h3>
                     <pre><code>mkdir /usr/local/etc/snort/rules</code></pre>
@@ -444,7 +432,7 @@ systemctl status snort3-nic</code></pre>
     ]]
 }</code></pre>
 
-                    <h2>✏️ 사용자 정의 룰 작성</h2>
+                    <h2>사용자 정의 룰 작성</h2>
 
                     <h3>로컬 룰 파일 생성</h3>
                     <pre><code>touch /usr/local/etc/snort/rules/local.rules
@@ -464,16 +452,16 @@ alert tcp any any -> any 443 (msg:"Web Attacking"; sid:1000003; rev:1;)
 alert tcp 192.168.1.17 any -> any 80 (msg:"Web Test"; sid:1000004; rev:1;)</code></pre>
 
                     <div class="highlight-box">
-                        <strong>📝 룰 구조 설명:</strong><br>
-                        • <code>alert</code>: 액션 (경고 및 탐지)<br>
-                        • <code>tcp/icmp</code>: 프로토콜<br>
-                        • <code>소스IP 소스포트 -> 목적지IP 목적지포트</code><br>
-                        • <code>msg</code>: 로그 메시지<br>
-                        • <code>sid</code>: 시그니처 ID<br>
-                        • <code>rev</code>: 룰 버전
+                        <strong>룰 구조 설명:</strong><br>
+                        • alert: 액션 (경고 및 탐지)<br>
+                        • tcp/icmp: 프로토콜<br>
+                        • 소스IP 소스포트 -> 목적지IP 목적지포트<br>
+                        • msg: 로그 메시지<br>
+                        • sid: 시그니처 ID<br>
+                        • rev: 룰 버전
                     </div>
 
-                    <h2>🔍 OpenAppId 설치 (선택사항)</h2>
+                    <h2>OpenAppId 설치 (선택사항)</h2>
                     <p>애플리케이션 탐지 기능을 위한 OpenAppId를 설치합니다:</p>
 
                     <pre><code>wget https://www.snort.org/downloads/openappid/33380 -O OpenAppId-33380.tgz
@@ -493,7 +481,7 @@ appid_listener =
     file = "/var/log/snort/appid-output.log",
 }</code></pre>
 
-                    <h2>▶️ Snort3 실행</h2>
+                    <h2>Snort3 실행</h2>
 
                     <h3>설정 파일 검증</h3>
                     <pre><code>snort -c /usr/local/etc/snort/snort.lua</code></pre>
@@ -502,13 +490,13 @@ appid_listener =
                     <pre><code>snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/rules/local.rules -i enp0s3 -A alert_fast -s 65535 -k none</code></pre>
 
                     <div class="highlight-box">
-                        <strong>🎯 실행 옵션 설명:</strong><br>
-                        • <code>-c</code>: 설정 파일 경로<br>
-                        • <code>-R</code>: 룰 파일 경로<br>
-                        • <code>-i</code>: 모니터링할 인터페이스<br>
-                        • <code>-A</code>: 알림 모드<br>
-                        • <code>-s</code>: 패킷 크기<br>
-                        • <code>-k</code>: 체크섬 검사 옵션
+                        <strong>실행 옵션 설명:</strong><br>
+                        •-c: 설정 파일 경로<br>
+                        •-R: 룰 파일 경로<br>
+                        •-i: 모니터링할 인터페이스<br>
+                        •-A: 알림 모드<br>
+                        •-s: 패킷 크기<br>
+                        •-k: 체크섬 검사 옵션
                     </div>
 
                     <p>이제 Snort3가 실시간으로 네트워크 트래픽을 모니터링하고, 정의된 룰에 따라 침입을 탐지합니다.</p>
@@ -522,26 +510,22 @@ appid_listener =
                 <div class="article-header">
                     <h1 class="article-title">Suricata IDS/IPS 설치 가이드</h1>
                 </div>
-                
-                <div class="article-image">
-                    🔐 Suricata Rocky Linux 9 기반에서 구현하기
-                </div>
 
                 <div class="article-content">
                     <p>이번 포스트에서는 <strong>Suricata IDS/IPS</strong>를 Rocky Linux 9 환경에서 구축하는 방법에 대해 자세히 알아보겠습니다.</p>
 
-                    <h2>📋 Suricata란?</h2>
+                    <h2>Suricata란?</h2>
                     <p>Suricata는 고성능 네트워크 IDS, IPS 및 네트워크 보안 모니터링 엔진으로, 멀티스레딩 아키텍처를 통해 높은 처리량을 제공합니다.</p>
                     
                     <div class="highlight-box">
-                        <strong>💡 주요 특징:</strong><br>
+                        <strong>주요 특징:</strong><br>
                         • 멀티스레드 처리로 고성능<br>
                         • JSON 형태의 상세한 로깅<br>
                         • Lua 스크립팅 지원<br>
                         • 파일 추출 및 TLS 인증서 로깅
                     </div>
 
-                    <h2>🛠️ 시스템 초기 설정</h2>
+                    <h2>시스템 초기 설정</h2>
 
                     <h3>시스템 업데이트</h3>
                     <pre><code>dnf update -y
@@ -553,7 +537,7 @@ dnf upgrade -y</code></pre>
                     <h3>Suricata 설치</h3>
                     <pre><code>dnf install -y suricata</code></pre>
 
-                    <h2>🌐 네트워크 인터페이스 확인</h2>
+                    <h2>네트워크 인터페이스 확인</h2>
                     <p>시스템의 네트워크 인터페이스를 확인합니다:</p>
                     
                     <pre><code>ip --brief addr</code></pre>
@@ -562,7 +546,7 @@ dnf upgrade -y</code></pre>
                         이 명령어로 확인한 인터페이스명을 다음 설정에서 사용합니다.
                     </div>
 
-                    <h2>⚙️ Suricata 환경설정</h2>
+                    <h2>Suricata 환경설정</h2>
 
                     <h3>메인 설정 파일 편집</h3>
                     <pre><code>vi /etc/suricata/suricata.yaml</code></pre>
@@ -579,10 +563,10 @@ dnf upgrade -y</code></pre>
                     <p>OPTIONS 항목에서 인터페이스를 실제 인터페이스명으로 변경합니다.</p>
 
                     <div class="warning-box">
-                        <strong>⚠️ 주의:</strong> 네트워크 인터페이스명은 시스템마다 다를 수 있습니다. 정확한 인터페이스명을 사용하세요.
+                        <strong>주의:</strong> 네트워크 인터페이스명은 시스템마다 다를 수 있습니다. 정확한 인터페이스명을 사용하세요.
                     </div>
 
-                    <h2>📜 룰 업데이트 및 관리</h2>
+                    <h2>룰 업데이트 및 관리</h2>
 
                     <h3>기본 룰 업데이트</h3>
                     <pre><code>suricata-update</code></pre>
@@ -598,7 +582,7 @@ suricata-update</code></pre>
                     <pre><code>ls -al /var/lib/suricata/rules/
 cat /var/lib/suricata/rules/suricata.rules</code></pre>
 
-                    <h2>🚀 서비스 관리</h2>
+                    <h2>서비스 관리</h2>
 
                     <h3>설정 파일 검증</h3>
                     <pre><code>suricata -c /etc/suricata/suricata.yaml</code></pre>
@@ -612,7 +596,7 @@ cat /var/lib/suricata/rules/suricata.rules</code></pre>
                     <h3>서비스 재시작</h3>
                     <pre><code>systemctl restart suricata</code></pre>
 
-                    <h2>✏️ 사용자 정의 룰 생성</h2>
+                    <h2>사용자 정의 룰 생성</h2>
 
                     <h3>로컬 룰 파일 생성</h3>
                     <pre><code>vi /etc/suricata/rules/local.rules</code></pre>
@@ -629,12 +613,64 @@ cat /var/lib/suricata/rules/suricata.rules</code></pre>
                     <pre><code>suricata -T -c /etc/suricata/suricata.yaml -v</code></pre>
 
                     <div class="highlight-box">
-                        <strong>📝 룰 작성 팁:</strong><br>
+                        <strong>룰 작성 팁:</strong><br>
                         • 모든 사용자 정의 룰은 <code>/etc/suricata/rules/</code> 경로에 위치<br>
                         • 룰 추가 후 반드시 설정 검증 실행<br>
                         • 룰 변경 후 서비스 재시작 필요
                     </div>
 
-                    <h2>📊 로그 모니터링</h2>
+                    <h2>로그 모니터링</h2>
 
-                    <h3>기본 로그 파일 위치
+                    <h3>기본 로그 파일 위치</h3>
+                    <pre><code>/var/log/suricata/suricata.log
+/var/log/suricata/fast.log
+/var/log/suricata/eve.json</code></pre>
+
+                    <h3>실시간 로그 모니터링</h3>
+                    <pre><code>tail -f /var/log/suricata/fast.log</code></pre>
+
+                    <h3>JSON 로그 분석</h3>
+                    <pre><code>jq '.' /var/log/suricata/eve.json | head -50</code></pre>
+
+                    <div class="highlight-box">
+                        <strong>로그 파일 설명:</strong><br>
+                        •suricata.log: 시스템 로그<br>
+                        •fast.log: 빠른 경고 로그<br>
+                        •eve.json: 상세한 JSON 형태 로그<br>
+                        •stats.log: 통계 정보
+                    </div>
+
+                    <p>이제 Suricata가 실시간으로 네트워크 트래픽을 모니터링하고, 정의된 룰에 따라 침입을 탐지합니다.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 My Development Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            // 모든 탭 컨텐츠 숨기기
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 모든 탭 버튼 비활성화
+            const allButtons = document.querySelectorAll('.tab-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 선택된 탭 표시
+            document.getElementById(tabName).classList.add('active');
+            
+            // 클릭된 버튼 활성화
+            event.target.classList.add('active');
+        }
+    </script>
