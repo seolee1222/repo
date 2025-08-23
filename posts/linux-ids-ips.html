@@ -500,6 +500,10 @@ appid_listener =
                     </div>
 
                     <p>이제 Snort3가 실시간으로 네트워크 트래픽을 모니터링하고, 정의된 룰에 따라 침입을 탐지합니다.</p>
+                    
+                    <h2>Snort3 를 구축하며 느낀 장점 및 단점</h2>
+                    <p>장점 : Snort3 프로그램 구동시 탐지에 대한 속도가 Suricata보다 빠르고 실행시 Syntax Error 가 있으면 알아보기 많이 편하였다</p>
+                    <p>단점 : 선행설치할 파일이 많았고 Suricata 보다 설치가 느리고 처음에 설정해줘야 할부분이 많았다</p>
                 </div>
             </article>
         </div>
@@ -641,6 +645,9 @@ cat /var/lib/suricata/rules/suricata.rules</code></pre>
                     </div>
 
                     <p>이제 Suricata가 실시간으로 네트워크 트래픽을 모니터링하고, 정의된 룰에 따라 침입을 탐지합니다.</p>
+                    <h2>Suricata를 설치하며 느낀 장점 및 단점</h2>
+                    <p>장점 : Snort3를 설치할때 보다 좀더 간단하고 설정해줘야 할것이 많지않았으며 비교적으로 훨씬 짧은 설치 시간이었다</p>
+                    <p>단점 : 설치시 실수 한 부분에 대한 에러처리가 어렵고 탐지속도가 Snort3보다 느렸으며 local.rules 를 사용할때 기본룰 과 충돌현상이 일어나는 부분이 많았다</p>
                 </div>
             </article>
         </div>
