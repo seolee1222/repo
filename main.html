@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>홍길동 | Portfolio</title>
+  <meta name="description" content="풀스택 개발자 홍길동 포트폴리오 — 프로젝트, 기술스택, 경력, 연락처" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary:#667eea;--secondary:#764ba2;--text:#1d1d1f;--muted:#666;--bg:#f8f9fa;--card:#fff;--radius:16px;
+      --shadow:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 8px 30px rgba(0,0,0,.15)
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text);background:var(--bg)}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Header / Hero */
+    .header{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:#fff;padding:3.5rem 0 3rem;position:relative;overflow:hidden}
+    .header::before{content:"";position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="g" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.12)"/><circle cx="75" cy="25" r="0.5" fill="rgba(255,255,255,0.06)"/><circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="25" cy="75" r="0.8" fill="rgba(255,255,255,0.06)"/><circle cx="75" cy="75" r="1.2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23g)"/></svg>');opacity:.9}
+    .hero{position:relative;z-index:1;text-align:center}
+    .title{font-size:2.6rem;font-weight:900;letter-spacing:.3px;margin-bottom:.5rem;text-shadow:2px 2px 4px rgba(0,0,0,.25)}
+    .subtitle{font-size:1.05rem;opacity:.95;font-weight:400}
+    .cta{margin-top:1.2rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{border:none;border-radius:999px;padding:.7rem 1.1rem;font-weight:800;cursor:pointer;transition:.25s}
+    .btn.primary{background:#fff;color:#4f46e5}
+    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.8);color:#fff}
+    .btn:hover{transform:translateY(-2px)}
+
+    /* Nav */
+    .nav{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:100;transition:all .3s ease}
+    .nav.transparent{background:rgba(255,255,255,.6);backdrop-filter:saturate(140%) blur(8px)}
+    .nav-content{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
+    .brand{font-weight:900;letter-spacing:.2px;color:var(--text)}
+    .nav-links{display:flex;list-style:none;gap:1.25rem}
+    .nav-links a{text-decoration:none;color:var(--text);font-weight:700;padding:.5rem 1rem;border-radius:20px;transition:.25s}
+    .nav-links a:hover{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;transform:translateY(-2px)}
+
+    main{margin:2rem 0}
+    section{scroll-margin-top:90px;margin-bottom:2rem}
+
+    /* Section headers */
+    .section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:1rem}
+    .section-title{font-size:1.6rem;font-weight:900}
+    .section-desc{color:var(--muted)}
+
+    /* About */
+    .about{display:grid;grid-template-columns:1fr 280px;gap:1.5rem}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card .inner{padding:1.25rem}
+    .avatar{width:100%;height:280px;border-radius:14px;background:linear-gradient(45deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+
+    /* Skills */
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:.75rem}
+    .chip{background:#eef2ff;color:#4f46e5;border:1px solid #e5e7ff;padding:.35rem .7rem;border-radius:999px;font-size:.9rem}
+
+    /* Projects */
+    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:1rem 0}
+    .search-box{position:relative;flex:1 1 280px}
+    .search-box input{width:100%;padding:.6rem 1rem;border:2px solid #e9ecef;border-radius:999px;outline:none;transition:border-color .25s}
+    .search-box input:focus{border-color:var(--primary)}
+    .filter-group{display:flex;gap:8px;flex-wrap:wrap}
+    .chip.btn{background:#f1f3f5;border:1px solid #e9ecef;color:#444}
+    .chip.btn.active,.chip.btn:hover{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-color:transparent}
+
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .project{cursor:pointer;overflow:hidden;border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transition:.25s;animation:fadeInUp .6s ease-out}
+    .project:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .thumb{height:180px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    .project .inner{padding:1.1rem}
+    .meta{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin-bottom:.6rem}
+    .badge{margin-left:auto;display:inline-block;background:#ecfeff;color:#0ea5e9;border:1px solid #bae6fd;padding:.18rem .6rem;border-radius:999px;font-size:.78rem}
+    .links{display:flex;gap:10px;margin-top:.6rem}
+    .links a{font-weight:800;text-decoration:none}
+    .links a.demo{color:#4f46e5}
+    .links a.repo{color:#059669}
+
+    /* Experience */
+    .timeline{display:grid;gap:12px}
+    .item{background:var(--card);border-radius:12px;padding:1rem;box-shadow:var(--shadow)}
+    .item h4{font-size:1.05rem}
+    .item .when{color:var(--muted);font-size:.92rem;margin:.25rem 0 .35rem}
+
+    /* Contact */
+    .contact-card{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem}
+    form{display:grid;gap:.7rem}
+    input,textarea{width:100%;padding:.7rem .9rem;border:2px solid #e9ecef;border-radius:12px;outline:none;transition:.25s;font:inherit}
+    input:focus,textarea:focus{border-color:var(--primary)}
+    textarea{min-height:120px;resize:vertical}
+
+    /* Footer */
+    .footer{background:#333;color:#fff;text-align:center;padding:2rem 0;margin-top:3rem}
+
+    @media (max-width:1024px){.projects{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr}.contact-card{grid-template-columns:1fr}}
+    @media (max-width:640px){.title{font-size:2.1rem}.projects{grid-template-columns:1fr}}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+    #toTop{position:fixed;right:18px;bottom:18px;border:none;border-radius:999px;padding:.7rem 1rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;display:none}
+    #toTop:hover{transform:translateY(-2px)}
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <header class="header" id="home">
+    <div class="container hero">
+      <h1 class="title">홍길동 · Full‑Stack Developer</h1>
+      <p class="subtitle">React · TypeScript · Node.js · Cloud — 사용자 경험을 중심에 두는 제품형 개발자</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">프로젝트 보러가기</a>
+        <a class="btn ghost" href="#contact">협업 문의</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav transparent">
+    <div class="container">
+      <div class="nav-content">
+        <div class="brand">HGD Portfolio</div>
+        <ul class="nav-links">
+          <li><a href="#about">소개</a></li>
+          <li><a href="#projects">프로젝트</a></li>
+          <li><a href="#skills">기술스택</a></li>
+          <li><a href="#experience">경력</a></li>
+          <li><a href="#contact">연락</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- About -->
+    <section id="about">
+      <div class="section-head">
+        <h2 class="section-title">소개</h2>
+        <p class="section-desc">문제 정의 → 빠른 실험 → 데이터 기반 개선</p>
+      </div>
+      <div class="about">
+        <div class="card"><div class="inner">
+          <p>안녕하세요. 비즈니스 임팩트를 만드는 풀스택 개발자 <strong>홍길동</strong>입니다. 디자인 감각과 제품 감수성을 바탕으로, 문제를 파고들어 <em>가치를 빠르게 검증</em>하고 <em>지속적으로 개선</em>하는 과정을 즐깁니다.</p>
+          <ul style="margin-top:.6rem; color:#444; padding-left:1.1rem;">
+            <li>프론트엔드: React, Next.js, Zustand, React Query</li>
+            <li>백엔드: Node.js, Express/Fastify, NestJS, Prisma</li>
+            <li>인프라: Docker, GitHub Actions, Vercel/Cloudflare/EC2</li>
+          </ul>
+          <div class="skills" style="margin-top:12px">
+            <span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Node.js</span><span class="chip">PostgreSQL</span><span class="chip">AWS</span><span class="chip">CI/CD</span>
+          </div>
+          <div class="links" style="margin-top:.8rem">
+            <a class="demo" href="#" target="_blank" rel="noopener">이력서(pdf)</a>
+            <a class="repo" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="demo" href="#" target="_blank" rel="noopener">Blog</a>
+          </div>
+        </div></div>
+        <div class="card"><div class="inner">
+          <div class="avatar">Your Photo</div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- Skills (separate anchor) -->
+    <section id="skills">
+      <div class="section-head">
+        <h2 class="section-title">핵심 기술</h2>
+        <p class="section-desc">최근 2년간 가장 많이 사용한 기술</p>
+      </div>
+      <div class="card"><div class="inner">
+        <div class="skills">
+          <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span>
+          <span class="chip">Node.js</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Prisma</span>
+          <span class="chip">Playwright</span><span class="chip">Vitest</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-head">
+        <h2 class="section-title">프로젝트</h2>
+        <p class="section-desc">역할·성과 중심으로 정리</p>
+      </div>
+      <div class="controls" aria-label="검색 및 필터">
+        <div class="search-box"><input id="search" type="search" placeholder="프로젝트 검색: 예) 대시보드, SaaS, Next.js ..."/></div>
+        <div class="filter-group" id="filters">
+          <button class="chip btn active" data-filter="all">전체</button>
+          <button class="chip btn" data-filter="frontend">Frontend</button>
+          <button class="chip btn" data-filter="backend">Backend</button>
+          <button class="chip btn" data-filter="fullstack">Full‑stack</button>
+          <button class="chip btn" data-filter="ml">AI/ML</button>
+        </div>
+      </div>
+
+      <div class="projects" aria-live="polite">
+        <!-- Project 1 -->
+        <article class="project" data-tags="fullstack next.js saas subscription" onclick="window.open('https://example.com/demo1','_blank')">
+          <div class="thumb" style="background:linear-gradient(45deg,#667eea,#764ba2)">SaaS Dashboard</div>
+          <div class="inner">
+            <div class="meta"><span>2025</span><span>Next.js · Prisma · Stripe</span><span class="badge">Full‑stack</span></div>
+            <h3>구독형 SaaS 대시보드</h3>
+            <p>프로덕트 기획부터 배포까지 단독 수행. <strong>전환율 18%↑</strong>, <strong>LCP 1.7s</strong>로 성능 최적화.</p>
+            <div class="links"><a class="demo" href="https://example.com/demo1" target="_blank" rel="noopener">Demo</a><a class="repo" href="https://github.com/you/repo1" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <!-- Project 2 -->
+        <article class="project" data-tags="frontend react charts" onclick="window.open('https://example.com/demo2','_blank')">
+          <div class="thumb" style="background:linear-gradient(45deg,#84fab0,#8fd3f4)">Analytics</div>
+          <div class="inner">
+            <div class="meta"><span>2024</span><span>React · Zustand · Chart</span><span class="badge">Frontend</span></div>
+            <h3>실시간 애널리틱스 UI</h3>
+            <p>웹소켓 기반 지표 스트리밍·가시화. <strong>CPU 30%↓</strong> 상태관리 경량화.</p>
+            <div class="links"><a class="demo" href="https://example.com/demo2" target="_blank" rel="noopener">Demo</a><a class="repo" href="https://github.com/you/repo2" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <!-- Project 3 -->
+        <article class="project" data-tags="backend node api" onclick="window.open('https://example.com/demo3','_blank')">
+          <div class="thumb" style="background:linear-gradient(45deg,#fa709a,#fee140)">API</div>
+          <div class="inner">
+            <div class="meta"><span>2024</span><span>NestJS · PostgreSQL · Redis</span><span class="badge">Backend</span></div>
+            <h3>고가용성 API 게이트웨이</h3>
+            <p>멀티리전 캐시·레이트리밋. <strong>p95 210ms</strong>, 장애 복구 자동화.</p>
+            <div class="links"><a class="demo" href="https://example.com/demo3" target="_blank" rel="noopener">Docs</a><a class="repo" href="https://github.com/you/repo3" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <!-- Project 4 -->
+        <article class="project" data-tags="ml llm rag" onclick="window.open('https://example.com/demo4','_blank')">
+          <div class="thumb" style="background:linear-gradient(45deg,#fbab7e,#f7ce68)">AI/RAG</div>
+          <div class="inner">
+            <div class="meta"><span>2025</span><span>Python · FastAPI · Qdrant</span><span class="badge">AI/ML</span></div>
+            <h3>문서 RAG 어시스턴트</h3>
+            <p>하이브리드 검색·rerank로 <strong>정확도 22%↑</strong>. 프롬프트 가드·감사 로깅.</p>
+            <div class="links"><a class="demo" href="https://example.com/demo4" target="_blank" rel="noopener">Demo</a><a class="repo" href="https://github.com/you/repo4" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <!-- Project 5 -->
+        <article class="project" data-tags="fullstack mobile pwa" onclick="window.open('https://example.com/demo5','_blank')">
+          <div class="thumb" style="background:linear-gradient(45deg,#00c6ff,#0072ff)">PWA</div>
+          <div class="inner">
+            <div class="meta"><span>2023</span><span>Next.js · Workbox</span><span class="badge">Full‑stack</span></div>
+            <h3>오프라인 PWA 노트앱</h3>
+            <p>로컬 우선 전략으로 <strong>TTI 1.3s</strong>. 동기화 충돌 처리.</p>
+            <div class="links"><a class="demo" href="https://example.com/demo5" target="_blank" rel="noopener">Demo</a><a class="repo" href="https://github.com/you/repo5" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <!-- Project 6 -->
+        <article class="project" data-tags="frontend design system" onclick="window.open('https://example.com/demo6','_blank')">
+          <div class="thumb" style="background:linear-gradient(45deg,#f093fb,#f5576c)">Design System</div>
+          <div class="inner">
+            <div class="meta"><span>2023</span><span>Storybook · Radix</span><span class="badge">Frontend</span></div>
+            <h3>사내 디자인시스템</h3>
+            <p>접근성 준수 컴포넌트 30+ 구축, <strong>개발 속도 25%↑</strong>.</p>
+            <div class="links"><a class="demo" href="https://example.com/demo6" target="_blank" rel="noopener">Docs</a><a class="repo" href="https://github.com/you/repo6" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="section-head">
+        <h2 class="section-title">경력</h2>
+        <p class="section-desc">역할과 임팩트</p>
+      </div>
+      <div class="timeline">
+        <div class="item">
+          <h4>Acme Corp · Senior Frontend Engineer</h4>
+          <div class="when">2023.03 — 현재</div>
+          <p>대시보드 리디자인/SSR 도입으로 로그인 후 첫화면 <strong>p75 LCP 42% 개선</strong>. AB 테스트 파이프라인 구축.</p>
+        </div>
+        <div class="item">
+          <h4>Startup X · Full‑stack Engineer</h4>
+          <div class="when">2021.06 — 2023.02</div>
+          <p>이커머스 MVP를 8주 내 출시, <strong>월 활성 1만+</strong> 성장. 데이터 모델·인프라 초석 마련.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-head">
+        <h2 class="section-title">연락</h2>
+        <p class="section-desc">협업 제안 환영합니다</p>
+      </div>
+      <div class="card contact-card">
+        <div class="inner">
+          <form onsubmit="event.preventDefault();window.location.href='mailto:you@example.com?subject=' + encodeURIComponent(document.getElementById('subject').value) + '&body=' + encodeURIComponent(document.getElementById('message').value);">
+            <input id="name" type="text" placeholder="이름" required />
+            <input id="email" type="email" placeholder="이메일" required />
+            <input id="subject" type="text" placeholder="제목" required />
+            <textarea id="message" placeholder="메시지" required></textarea>
+            <button class="btn" style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff">메일 보내기</button>
+          </form>
+        </div>
+        <div class="inner">
+          <p style="color:#444">직접 연락하기</p>
+          <ul style="margin-top:.5rem; padding-left:1.1rem; color:#444">
+            <li>이메일: <a href="mailto:you@example.com">you@example.com</a></li>
+            <li>GitHub: <a href="#" target="_blank" rel="noopener">github.com/you</a></li>
+            <li>LinkedIn: <a href="#" target="_blank" rel="noopener">linkedin.com/in/you</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Hong Gil Dong. All rights reserved.</p>
+      <p style="margin-top:.5rem;opacity:.85">Made with ❤️ using HTML, CSS & JavaScript</p>
+    </div>
+  </footer>
+
+  <button id="toTop" aria-label="맨 위로">↑</button>
+
+  <script>
+    // Transparent nav
+    const nav = document.querySelector('.nav');
+    const toTopBtn = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;nav.classList.toggle('transparent', y < 80);toTopBtn.style.display = y > 300 ? 'block' : 'none';
+    });
+
+    // Search & filter
+    const searchInput = document.getElementById('search');
+    const chips = document.querySelectorAll('#filters .chip');
+    const cards = [...document.querySelectorAll('.project[data-tags]')];
+    let activeFilter = 'all';
+    function applyFilter(){
+      const q = (searchInput?.value || '').trim().toLowerCase();
+      cards.forEach(card=>{
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        const text = card.innerText.toLowerCase();
+        const matchText = !q || text.includes(q) || tags.includes(q);
+        const matchFilter = activeFilter === 'all' || tags.includes(activeFilter.toLowerCase());
+        card.style.display = (matchText && matchFilter) ? '' : 'none';
+      });
+    }
+    if(searchInput){searchInput.addEventListener('input', applyFilter)}
+    chips.forEach(chip=>chip.addEventListener('click',()=>{chips.forEach(c=>c.classList.remove('active'));chip.classList.add('active');activeFilter = chip.dataset.filter || 'all';applyFilter();}));
+
+    // Card hover polish
+    document.querySelectorAll('.project').forEach(card=>{
+      card.addEventListener('mouseenter',()=>card.style.transform='translateY(-8px) scale(1.02)');
+      card.addEventListener('mouseleave',()=>card.style.transform='translateY(0) scale(1)');
+    });
+
+    // Scroll top
+    toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+  </script>
+</body>
+</html>
