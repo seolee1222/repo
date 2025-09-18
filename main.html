@@ -198,8 +198,8 @@
             <div class="meta"><span>2025</span><span>Cisco · GNS3</span><span class="badge">Network</span></div>
             <h3>VLAN 10/20/30 구축 및 통신 확인</h3>
             <p>VLAN을 설계·구축하여 세그먼트 간 통신을 제어. VLAN 10에서 20, 30과 통신 가능 여부를 테스트.</p>
-            <img class="project-img" src="/mnt/data/vlan설정.PNG" alt="VLAN 설정 화면"/>
-            <img class="project-img" src="/mnt/data/vlan 10,20,30설정완료후 10에서 20,30통신.PNG" alt="VLAN 통신 테스트 결과"/>
+            <img class="project-img" src="pj2/vlan설정.PNG" alt="VLAN 설정 화면"/>
+            <img class="project-img" src="pj2/vlan 10,20,30설정완료후 10에서 20,30통신.PNG" alt="VLAN 통신 테스트 결과"/>
           </div>
         </article>
 
@@ -210,11 +210,11 @@
             <div class="meta"><span>2025</span><span>ASA · Router</span><span class="badge">Security</span></div>
             <h3>방화벽 접근 제어 및 원격 접속 보안</h3>
             <p>내부에서 외부로 Telnet/SSH 접속을 제어하고, HTTPS/HTTP 접근 허용 여부를 검증.</p>
-            <img class="project-img" src="/mnt/data/인사이드에서 텔넷.PNG" alt="내부에서 Telnet 접속 시도"/>
-            <img class="project-img" src="/mnt/data/r2 r4 로ssh 접속가능.PNG" alt="SSH 접속 성공"/>
-            <img class="project-img" src="/mnt/data/https접속가능.PNG" alt="HTTPS 접속 성공"/>
-            <img class="project-img" src="/mnt/data/http 접속가능.PNG" alt="HTTP 접속 성공"/>
-            <img class="project-img" src="/mnt/data/ftp접속 불가능.PNG" alt="FTP 접속 차단"/>
+            <img class="project-img" src="pj2/인사이드에서 텔넷.PNG" alt="내부에서 Telnet 접속 시도"/>
+            <img class="project-img" src="pj2/r2 r4 로ssh 접속가능.PNG" alt="SSH 접속 성공"/>
+            <img class="project-img" src="pj2/https접속가능.PNG" alt="HTTPS 접속 성공"/>
+            <img class="project-img" src="pj2/http 접속가능.PNG" alt="HTTP 접속 성공"/>
+            <img class="project-img" src="pj2/ftp접속 불가능.PNG" alt="FTP 접속 차단"/>
           </div>
         </article>
 
@@ -225,7 +225,7 @@
             <div class="meta"><span>2025</span><span>PMM · Router</span><span class="badge">Monitoring</span></div>
             <h3>PMM 클라이언트와 R3 통신 확인</h3>
             <p>PMM 모니터링 환경에서 R3와 정상적으로 통신 가능함을 확인.</p>
-            <img class="project-img" src="/mnt/data/pmm client와 R3 통신가능.PNG" alt="PMM Client와 R3 통신 결과"/>
+            <img class="project-img" src="pj2/pmm client와 R3 통신가능.PNG" alt="PMM Client와 R3 통신 결과"/>
           </div>
         </article>
 
@@ -236,10 +236,9 @@
             <div class="meta"><span>2025</span><span>Linux · C Language</span><span class="badge">Security</span></div>
             <h3>버퍼 오버플로우(Buffer Overflow) 발생 실습</h3>
             <p>脆弱한 C 프로그램을 작성 후, 입력값 초과로 BOF 발생을 확인하여 보안 취약점 사례 분석.</p>
-            <img class="project-img" src="/mnt/data/bof 발생시키기.PNG" alt="Buffer Overflow 발생"/>
+            <img class="project-img" src="pj2/bof 발생시키기.PNG" alt="Buffer Overflow 발생"/>
           </div>
         </article>
-
       </div>
     </section>
 
@@ -251,75 +250,4 @@
       </div>
       <div class="card contact-card">
         <div class="inner">
-          <form onsubmit="event.preventDefault();window.location.href='mailto:you@example.com?subject=' + encodeURIComponent(document.getElementById('subject').value) + '&body=' + encodeURIComponent(document.getElementById('message').value);">
-            <input id="name" type="text" placeholder="이름" required />
-            <input id="email" type="email" placeholder="이메일" required />
-            <input id="subject" type="text" placeholder="제목" required />
-            <textarea id="message" placeholder="메시지" required></textarea>
-            <button class="btn submit">메일 보내기</button>
-          </form>
-        </div>
-        <div class="inner">
-          <p style="color:#444">직접 연락하기</p>
-          <ul style="margin-top:.5rem; padding-left:1.1rem; color:#444">
-            <li>이메일: <a href="mailto:you@example.com">you@example.com</a></li>
-            <li>GitHub: <a href="#" target="_blank" rel="noopener">github.com/you</a></li>
-            <li>LinkedIn: <a href="#" target="_blank" rel="noopener">linkedin.com/in/you</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Lee Seok Hyun. All rights reserved.</p>
-      <p style="margin-top:.5rem;opacity:.85">Made with HTML, CSS & JavaScript</p>
-    </div>
-  </footer>
-
-  <button id="toTop" aria-label="맨 위로">↑</button>
-
-  <script>
-    const nav = document.querySelector('.nav');
-    const toTopBtn = document.getElementById('toTop');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      nav.classList.toggle('transparent', y < 80);
-      toTopBtn.style.display = y > 300 ? 'block' : 'none';
-    });
-
-    const searchInput = document.getElementById('search');
-    const chips = document.querySelectorAll('#filters .chip');
-    const cards = [...document.querySelectorAll('.project[data-tags]')];
-    let activeFilter = 'all';
-
-    function applyFilter(){
-      const q = (searchInput?.value || '').trim().toLowerCase();
-      cards.forEach(card=>{
-        const tags = card.getAttribute('data-tags').toLowerCase();
-        const text = card.innerText.toLowerCase();
-        const matchText = !q || text.includes(q) || tags.includes(q);
-        const matchFilter = activeFilter === 'all' || tags.includes(activeFilter.toLowerCase());
-        card.style.display = (matchText && matchFilter) ? '' : 'none';
-      });
-    }
-    if(searchInput){searchInput.addEventListener('input', applyFilter)}
-    chips.forEach(chip=>{
-      chip.addEventListener('click', ()=>{
-        chips.forEach(c=>c.classList.remove('active'));
-        chip.classList.add('active');
-        activeFilter = chip.dataset.filter || 'all';
-        applyFilter();
-      });
-    });
-
-    document.querySelectorAll('.project').forEach(card=>{
-      card.addEventListener('mouseenter',()=>card.style.transform='translateY(-8px) scale(1.02)');
-      card.addEventListener('mouseleave',()=>card.style.transform='translateY(0) scale(1)');
-    });
-
-    toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-  </script>
-</body>
-</html>
+          <form onsubmit="event.preventDefault();window.location.href='mailto:you@example.com?subject=' + encodeURIComponent(document.getElementById('subject').value)
