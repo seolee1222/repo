@@ -2,68 +2,38 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lee Seok Hyun | Portfolio</title>
   <meta name="description" content="네트워크 및 보안 엔지니어 이석현 포트폴리오 — 프로젝트, 기술스택, 경력, 연락처" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      /* Grayscale palette */
-      --primary:#222;         /* main accent */
-      --secondary:#444;       /* secondary accent */
-      --text:#1d1d1f;         /* body text */
-      --muted:#666;           /* muted text */
-      --bg:#f7f7f8;           /* page background */
-      --card:#ffffff;         /* card background */
-      --line:#e6e6e6;         /* subtle border */
-      --radius:16px;
-      --shadow:0 4px 20px rgba(0,0,0,.08);
-      --shadow-lg:0 8px 30px rgba(0,0,0,.15)
+      --primary:#222; --secondary:#444; --text:#1d1d1f; --muted:#666; --bg:#f7f7f8; --card:#ffffff; --line:#e6e6e6; --radius:16px; --shadow:0 4px 20px rgba(0,0,0,.08); --shadow-lg:0 8px 30px rgba(0,0,0,.15)
     }
     html,body{height:100%}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-      line-height:1.6;color:var(--text);background:var(--bg)
-    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text);background:var(--bg)}
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
     /* Header / Hero */
-    .header{
-      background:#0f0f10; color:#fff; padding:3.5rem 0 3rem;
-      position:relative; overflow:hidden
-    }
-    .header::before{
-      /* very subtle noise pattern in grayscale */
-      content:""; position:absolute; inset:0; opacity:.16;
-      background-image: radial-gradient(#fff 1px, transparent 1px);
-      background-size: 3px 3px;
-    }
+    .header{background:#0f0f10;color:#fff;padding:3.5rem 0 3rem;position:relative;overflow:hidden}
+    .header::before{content:"";position:absolute;inset:0;opacity:.16;background-image: radial-gradient(#fff 1px, transparent 1px);background-size:3px 3px}
     .hero{position:relative;z-index:1;text-align:center}
     .title{font-size:2.6rem;font-weight:900;margin-bottom:.5rem;letter-spacing:.2px}
     .subtitle{font-size:1.05rem;opacity:.9;font-weight:400}
     .cta{margin-top:1.2rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{
-      border:none;border-radius:999px;padding:.7rem 1.1rem;
-      font-weight:800;cursor:pointer;transition:.25s
-    }
+    .btn{border:none;border-radius:999px;padding:.7rem 1.1rem;font-weight:800;cursor:pointer;transition:.25s}
     .btn.primary{background:#222;color:#fff}
     .btn.ghost{background:transparent;border:2px solid #fff;color:#fff}
     .btn:hover{transform:translateY(-2px);background:#333;color:#fff}
     .btn.ghost:hover{border-color:#dcdcdc;background:#1a1a1a}
 
     /* Nav */
-    .nav{
-      background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.06);
-      position:sticky; top:0; z-index:100; transition:all .3s ease
-    }
-    .nav.transparent{background:rgba(255,255,255,.65); backdrop-filter:saturate(140%) blur(8px)}
+    .nav{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:100;transition:all .3s ease}
+    .nav.transparent{background:rgba(255,255,255,.65);backdrop-filter:saturate(140%) blur(8px)}
     .nav-content{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
     .brand{font-weight:900;letter-spacing:.2px;color:var(--text)}
     .nav-links{display:flex;list-style:none;gap:1.25rem}
-    .nav-links a{
-      text-decoration:none;color:var(--text);font-weight:700;
-      padding:.5rem 1rem;border-radius:20px;transition:.25s
-    }
+    .nav-links a{text-decoration:none;color:var(--text);font-weight:700;padding:.5rem 1rem;border-radius:20px;transition:.25s}
     .nav-links a:hover{background:#222;color:#fff;transform:translateY(-2px)}
 
     main{margin:2rem 0}
@@ -76,76 +46,38 @@
 
     /* About */
     .about{display:grid;grid-template-columns:1fr 280px;gap:1.5rem}
-    .card{
-      background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
-      border:1px solid var(--line)
-    }
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line)}
     .card .inner{padding:1.25rem}
-    .avatar{
-      width:100%;height:280px;border-radius:14px;
-      background:linear-gradient(180deg,#d9d9d9,#cfcfcf);
-      display:flex;align-items:center;justify-content:center;color:#222;font-weight:800
-    }
+    .avatar{width:100%;height:280px;border-radius:14px;background:linear-gradient(180deg,#d9d9d9,#cfcfcf);display:flex;align-items:center;justify-content:center;color:#222;font-weight:800}
 
     /* Skills */
     .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:.75rem}
-    .chip{
-      background:#f0f0f0;color:#222;border:1px solid #dcdcdc;
-      padding:.35rem .7rem;border-radius:999px;font-size:.9rem
-    }
+    .chip{background:#f0f0f0;color:#222;border:1px solid #dcdcdc;padding:.35rem .7rem;border-radius:999px;font-size:.9rem}
 
     /* Projects */
     .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:1rem 0}
     .search-box{position:relative;flex:1 1 280px}
-    .search-box input{
-      width:100%;padding:.6rem 1rem;border:2px solid #e3e3e3;
-      border-radius:999px;outline:none;transition:border-color .25s;background:#fff
-    }
+    .search-box input{width:100%;padding:.6rem 1rem;border:2px solid #e3e3e3;border-radius:999px;outline:none;transition:border-color .25s;background:#fff}
     .search-box input:focus{border-color:#222}
     .filter-group{display:flex;gap:8px;flex-wrap:wrap}
     .chip.btn{background:#f5f5f5;border:1px solid #dcdcdc;color:#222}
     .chip.btn.active,.chip.btn:hover{background:#222;color:#fff;border-color:#222}
 
     .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .project{
-      cursor:pointer;overflow:hidden;border-radius:var(--radius);
-      background:var(--card);box-shadow:var(--shadow);transition:.25s;
-      border:1px solid var(--line)
-    }
+    .project{cursor:pointer;overflow:hidden;border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transition:.25s;border:1px solid var(--line)}
     .project:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-    .thumb{
-      height:180px;display:flex;align-items:center;justify-content:center;
-      color:#fff;font-weight:800;background:#222
-    }
+    .thumb{height:180px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;background:#222}
     .project .inner{padding:1.1rem}
-    .meta{
-      display:flex;gap:.6rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted);
-      margin-bottom:.6rem
-    }
-    .badge{
-      margin-left:auto;display:inline-block;background:#eee;color:#222;
-      padding:.18rem .6rem;border-radius:999px;font-size:.78rem;border:1px solid #ddd
-    }
+    .meta{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin-bottom:.6rem}
+    .badge{margin-left:auto;display:inline-block;background:#eee;color:#222;padding:.18rem .6rem;border-radius:999px;font-size:.78rem;border:1px solid #ddd}
     .links{display:flex;gap:10px;margin-top:.6rem}
     .links a{font-weight:800;text-decoration:none;color:#222}
     .links a:hover{color:#000;text-decoration:underline}
 
-    /* Experience (kept if needed later) */
-    .timeline{display:grid;gap:12px}
-    .item{
-      background:var(--card);border-radius:12px;padding:1rem;box-shadow:var(--shadow);
-      border:1px solid var(--line)
-    }
-    .item h4{font-size:1.05rem}
-    .item .when{color:var(--muted);font-size:.92rem;margin:.25rem 0 .35rem}
-
     /* Contact */
     .contact-card{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem}
     form{display:grid;gap:.7rem}
-    input,textarea{
-      width:100%;padding:.7rem .9rem;border:2px solid #e3e3e3;border-radius:12px;
-      outline:none;transition:.25s;font:inherit;background:#fff
-    }
+    input,textarea{width:100%;padding:.7rem .9rem;border:2px solid #e3e3e3;border-radius:12px;outline:none;transition:.25s;font:inherit;background:#fff}
     input:focus,textarea:focus{border-color:#222}
     textarea{min-height:120px;resize:vertical}
     .btn.submit{background:#222;color:#fff}
@@ -155,23 +87,14 @@
     .footer{background:#0f0f10;color:#fff;text-align:center;padding:2rem 0;margin-top:3rem}
 
     /* Responsive */
-    @media (max-width:1024px){
-      .projects{grid-template-columns:repeat(2,1fr)}
-      .about{grid-template-columns:1fr}
-      .contact-card{grid-template-columns:1fr}
-    }
-    @media (max-width:640px){
-      .title{font-size:2.1rem}
-      .projects{grid-template-columns:1fr}
-    }
+    @media (max-width:1024px){.projects{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr}.contact-card{grid-template-columns:1fr}}
+    @media (max-width:640px){.title{font-size:2.1rem}.projects{grid-template-columns:1fr}}
 
     /* Back to top */
-    #toTop{
-      position:fixed;right:18px;bottom:18px;border:none;border-radius:999px;
-      padding:.7rem 1rem;background:#222;color:#fff;box-shadow:var(--shadow-lg);
-      cursor:pointer;font-weight:700;display:none
-    }
+    #toTop{position:fixed;right:18px;bottom:18px;border:none;border-radius:999px;padding:.7rem 1rem;background:#222;color:#fff;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;display:none}
     #toTop:hover{background:#000;transform:translateY(-2px)}
+
+    img.project-img{width:100%;margin-top:.6rem;border-radius:12px;border:1px solid var(--line)}
   </style>
 </head>
 <body>
@@ -196,7 +119,6 @@
           <li><a href="#about">소개</a></li>
           <li><a href="#projects">프로젝트</a></li>
           <li><a href="#skills">기술스택</a></li>
-          <!-- 필요 시 경력 섹션 추가 -->
           <li><a href="#contact">연락</a></li>
         </ul>
       </div>
@@ -257,6 +179,7 @@
         <h2 class="section-title">프로젝트</h2>
         <p class="section-desc">역할 · 성과 중심 정리</p>
       </div>
+
       <div class="controls" aria-label="검색 및 필터">
         <div class="search-box"><input id="search" type="search" placeholder="프로젝트 검색: 예) Zabbix, IDS, NAT, GNS3 ..." /></div>
         <div class="filter-group" id="filters">
@@ -268,47 +191,55 @@
       </div>
 
       <div class="projects" aria-live="polite">
-        <!-- Project 1 -->
-        <article class="project" data-tags="monitoring zabbix nms security">
-          <div class="thumb">NMS / Zabbix</div>
-          <div class="inner">
-            <div class="meta"><span>2025</span><span>Zabbix · Linux · MariaDB</span><span class="badge">Monitoring</span></div>
-            <h3>NMS(Network Management System) Zabbix 구축</h3>
-            <p>네트워크 지표 수집 및 경보 체계 설계. <strong>장애 탐지 TTD 50% 단축</strong>, 템플릿/오토디스커버리로 운영 자동화.</p>
-            <div class="links">
-              <a class="demo" href="posts/nms-zabbix.html">문서</a>
-              <a class="repo" href="#" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project" data-tags="network nat cisco gns3">
-          <div class="thumb">NAT / GNS3</div>
+        <!-- Project 1: VLAN -->
+        <article class="project" data-tags="network vlan cisco gns3">
+          <div class="thumb">VLAN / Cisco</div>
           <div class="inner">
             <div class="meta"><span>2025</span><span>Cisco · GNS3</span><span class="badge">Network</span></div>
-            <h3>NAT 시스템 구축 (GNS3/Cisco Topology)</h3>
-            <p>토폴로지 설계 및 NAT 정책 적용. <strong>세그먼트 간 통신 보안 분리</strong> 및 외부 접근 제어 최적화.</p>
-            <div class="links">
-              <a class="demo" href="posts/nat-system.html">문서</a>
-              <a class="repo" href="#" target="_blank" rel="noopener">Lab</a>
-            </div>
+            <h3>VLAN 10/20/30 구축 및 통신 확인</h3>
+            <p>VLAN을 설계·구축하여 세그먼트 간 통신을 제어. VLAN 10에서 20, 30과 통신 가능 여부를 테스트.</p>
+            <img class="project-img" src="/mnt/data/vlan설정.PNG" alt="VLAN 설정 화면"/>
+            <img class="project-img" src="/mnt/data/vlan 10,20,30설정완료후 10에서 20,30통신.PNG" alt="VLAN 통신 테스트 결과"/>
           </div>
         </article>
 
-        <!-- Project 3 -->
-        <article class="project" data-tags="security ids ips snort suricata linux">
-          <div class="thumb">IDS / IPS</div>
+        <!-- Project 2: 보안 (방화벽/접속) -->
+        <article class="project" data-tags="security firewall ssh telnet">
+          <div class="thumb">Firewall / SSH</div>
           <div class="inner">
-            <div class="meta"><span>2025</span><span>Snort3 · Suricata · Linux</span><span class="badge">Security</span></div>
-            <h3>Linux 기반 IDS/IPS 구축 (Snort3/Suricata)</h3>
-            <p>탐지 룰 설계와 튜닝으로 <strong>오탐 감소</strong>, 주요 이벤트 대시보드 구성 및 대응 플로우 정립.</p>
-            <div class="links">
-              <a class="demo" href="posts/linux-ids-ips.html">문서</a>
-              <a class="repo" href="#" target="_blank" rel="noopener">Rules</a>
-            </div>
+            <div class="meta"><span>2025</span><span>ASA · Router</span><span class="badge">Security</span></div>
+            <h3>방화벽 접근 제어 및 원격 접속 보안</h3>
+            <p>내부에서 외부로 Telnet/SSH 접속을 제어하고, HTTPS/HTTP 접근 허용 여부를 검증.</p>
+            <img class="project-img" src="/mnt/data/인사이드에서 텔넷.PNG" alt="내부에서 Telnet 접속 시도"/>
+            <img class="project-img" src="/mnt/data/r2 r4 로ssh 접속가능.PNG" alt="SSH 접속 성공"/>
+            <img class="project-img" src="/mnt/data/https접속가능.PNG" alt="HTTPS 접속 성공"/>
+            <img class="project-img" src="/mnt/data/http 접속가능.PNG" alt="HTTP 접속 성공"/>
+            <img class="project-img" src="/mnt/data/ftp접속 불가능.PNG" alt="FTP 접속 차단"/>
           </div>
         </article>
+
+        <!-- Project 3: Monitoring -->
+        <article class="project" data-tags="monitoring pmm r3 zabbix">
+          <div class="thumb">Monitoring</div>
+          <div class="inner">
+            <div class="meta"><span>2025</span><span>PMM · Router</span><span class="badge">Monitoring</span></div>
+            <h3>PMM 클라이언트와 R3 통신 확인</h3>
+            <p>PMM 모니터링 환경에서 R3와 정상적으로 통신 가능함을 확인.</p>
+            <img class="project-img" src="/mnt/data/pmm client와 R3 통신가능.PNG" alt="PMM Client와 R3 통신 결과"/>
+          </div>
+        </article>
+
+        <!-- Project 4: 취약점 테스트 -->
+        <article class="project" data-tags="security exploit bof">
+          <div class="thumb">Exploit / BOF</div>
+          <div class="inner">
+            <div class="meta"><span>2025</span><span>Linux · C Language</span><span class="badge">Security</span></div>
+            <h3>버퍼 오버플로우(Buffer Overflow) 발생 실습</h3>
+            <p>脆弱한 C 프로그램을 작성 후, 입력값 초과로 BOF 발생을 확인하여 보안 취약점 사례 분석.</p>
+            <img class="project-img" src="/mnt/data/bof 발생시키기.PNG" alt="Buffer Overflow 발생"/>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -350,7 +281,6 @@
   <button id="toTop" aria-label="맨 위로">↑</button>
 
   <script>
-    // Transparent nav
     const nav = document.querySelector('.nav');
     const toTopBtn = document.getElementById('toTop');
     window.addEventListener('scroll', () => {
@@ -359,7 +289,6 @@
       toTopBtn.style.display = y > 300 ? 'block' : 'none';
     });
 
-    // Search & filter
     const searchInput = document.getElementById('search');
     const chips = document.querySelectorAll('#filters .chip');
     const cards = [...document.querySelectorAll('.project[data-tags]')];
@@ -385,13 +314,11 @@
       });
     });
 
-    // Card hover polish
     document.querySelectorAll('.project').forEach(card=>{
       card.addEventListener('mouseenter',()=>card.style.transform='translateY(-8px) scale(1.02)');
       card.addEventListener('mouseleave',()=>card.style.transform='translateY(0) scale(1)');
     });
 
-    // Scroll top
     toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
   </script>
 </body>
