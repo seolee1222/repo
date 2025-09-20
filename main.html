@@ -151,8 +151,35 @@
       font-size:.9rem;
       color:var(--muted);
     }
-    .gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
-    .gallery img { width:100%; height:auto; border-radius:8px; border:1px solid var(--line); }
+    .gallery { 
+      display:grid; 
+      grid-template-columns:repeat(2,1fr); 
+      gap:16px; 
+      margin-top:16px; 
+    }
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .gallery img { 
+      width:100%; 
+      height:auto; 
+      border-radius:8px; 
+      border:1px solid var(--line);
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.02);
+      cursor: pointer;
+    }
+    .image-caption {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 500;
+      line-height: 1.4;
+    }
     @media (max-width:640px){
       .category-nav{
         grid-template-columns:repeat(2,1fr);
@@ -269,8 +296,8 @@
           <div class="thumb">프로젝트2</div>
           <div class="inner">
             <div class="meta"><span>2025</span><span>Various</span><span class="badge">Portfolio</span></div>
-            <h3>프로젝트2</h3>
-            <p>카테고리별 이미지가 프로젝트 상세에서 정리되어 있습니다.</p>
+            <h3>네트워크 및 보안 실습</h3>
+            <p>카테고리별로 정리된 실무 프로젝트 스크린샷과 구축 과정을 확인할 수 있습니다.</p>
           </div>
         </article>
       </div>
@@ -318,7 +345,7 @@
           <h1 id="projectTitle" class="title">프로젝트</h1>
           <button class="close-btn" onclick="closeProjectDetail(); return false;">✕ 닫기</button>
         </div>
-        <p class="subtitle">세부 카테고리별 상세 내용</p>
+        <p class="subtitle">세부 카테고리별 상세 내용 및 구축 스크린샷</p>
       </div>
     </header>
     
@@ -401,7 +428,7 @@
     function openProjectDetail(projectId, title) {
       const projectTitles = {
         'project1': '프로젝트1',
-        'project2': '프로젝트2'
+        'project2': '네트워크 및 보안 실습'
       };
       document.getElementById('projectTitle').textContent = projectTitles[projectId] || title;
       document.getElementById('projectDetail').classList.add('show');
@@ -454,87 +481,212 @@
       const categoryTitle = document.getElementById('categoryTitle');
       const categoryDetails = document.getElementById('categoryDetails');
 
-      // 이미지 경로는 pj2/<파일명> 형태로 예상합니다.
-      // 실제 파일명이 정확히 일치해야 브라우저에서 로드됩니다.
-      const gallery = (files) => {
-        if (!files || files.length === 0) return '<p>등록된 이미지가 없습니다.</p>';
-        return `<div class="gallery">` + files.map(f => `<img src="pj2/${f}" alt="${f}">`).join('') + `</div>`;
+      // 이미지와 설명을 함께 표시하는 갤러리 함수
+      const gallery = (images) => {
+        if (!images || images.length === 0) return '<p>등록된 이미지가 없습니다.</p>';
+        return `<div class="gallery">` + 
+          images.map(item => `
+            <div class="gallery-item">
+              <img src="pj2/${item.file}" alt="${item.alt}" title="${item.description}">
+              <div class="image-caption">${item.description}</div>
+            </div>
+          `).join('') + 
+          `</div>`;
       };
 
       const categories = {
         network: {
-          title: '네트워크',
+          title: '네트워크 구성 및 구축',
           content: `
-            <h3>네트워크 구성 및 구축</h3>
-            <p>VLAN, 라우팅, NFS, SMB, SSH 연결 테스트 등 네트워크 관련 이미지입니다.</p>
+            <h3>네트워크 인프라 설계 및 구축</h3>
+            <p>VLAN 설정, 라우터 간 통신, 파일 서버(NFS/SMB) 구축, SSH/FTP 서비스 설정 등 네트워크 인프라 전반의 구축과정을 담은 스크린샷들입니다.</p>
             ${gallery([
-              'vlan 설정.PNG',
-              'vlan 설정.PNG', 
-              'vlan 10,20,30설정완료후 10에서 20,30통신.PNG',
-              'r2 r4 로ssh 접속가능.PNG',
-              'r2 에서 R3 ssh정책 주기전.PNG',
-              'nfs 구축.PNG',
-              'smbshare 서버 구축 및 활성화.PNG',
-              '인사이드에서 텔넷.PNG',
-              'ftp 서버 구축 파일질라 cmd통신 성공.PNG'
+              {
+                file: 'vlan 설정.PNG',
+                alt: 'VLAN 설정 화면',
+                description: 'VLAN 10, 20, 30 구성 및 설정 완료'
+              },
+              {
+                file: 'vlan 10,20,30설정완료후 10에서 20,30통신.PNG',
+                alt: 'VLAN 간 통신 테스트',
+                description: 'VLAN 10에서 20, 30번 VLAN으로 통신 테스트 성공'
+              },
+              {
+                file: 'r2 r4 로ssh 접속가능.PNG',
+                alt: 'SSH 접속 성공',
+                description: 'R2에서 R4로 SSH 원격 접속 가능 확인'
+              },
+              {
+                file: 'r2 에서 R3 ssh정책 주기전.PNG',
+                alt: 'SSH 정책 설정 전',
+                description: 'R2에서 R3 SSH 보안 정책 적용 전 상태'
+              },
+              {
+                file: 'nfs 구축.PNG',
+                alt: 'NFS 서버 구축',
+                description: 'NFS 파일 서버 구축 및 설정 완료'
+              },
+              {
+                file: 'smbshare 서버 구축 및 활성화.PNG',
+                alt: 'SMB 서버 구축',
+                description: 'SMB Share 서버 구축 및 서비스 활성화'
+              },
+              {
+                file: '인사이드에서 텔넷.PNG',
+                alt: '텔넷 접속',
+                description: '내부 네트워크에서 텔넷 접속 테스트'
+              },
+              {
+                file: 'ftp 서버 구축 파일질라 cmd통신 성공.PNG',
+                alt: 'FTP 서버 구축',
+                description: 'FTP 서버 구축 및 FileZilla, CMD 통신 테스트 성공'
+              }
             ])}
           `
         },
         security: {
           title: '보안솔루션 & 취약점 실습',
           content: `
-            <h3>보안 및 취약점 관련</h3>
-            <p>BOF, CTF, 권한 상승, 접근 제어, 인증/비밀번호 관련 이미지입니다.</p>
+            <h3>보안 취약점 분석 및 대응</h3>
+            <p>BOF(Buffer Overflow) 공격, CTF 문제 해결, 권한 상승, 접근 제어, 패스워드 정책 등 보안 관련 실습과 구축 과정을 담은 스크린샷들입니다.</p>
             ${gallery([
-              'bof 발생시키기.PNG',
-              'ctf userflag.PNG',
-              'venus root플래그.PNG',
-              'uid bit설정 권한상승.PNG',
-              '스티키 비트 설정.PNG',
-              'ossec 연결 가능.PNG',
-              'ftp접속 불가능.PNG',
-              'http 접속가능.PNG',
-              'https접속가능.PNG',
-              '비밀번호 90일.PNG',
-              '비밀번호 변경.PNG'
+              {
+                file: 'bof 발생시키기.PNG',
+                alt: 'Buffer Overflow 실습',
+                description: 'BOF(Buffer Overflow) 취약점 발생 시키기 실습'
+              },
+              {
+                file: 'ctf userflag.PNG',
+                alt: 'CTF User Flag',
+                description: 'CTF 해킹 대회 - User Flag 획득 성공'
+              },
+              {
+                file: 'venus root플래그.PNG',
+                alt: 'Venus Root Flag',
+                description: 'Venus 시스템 - Root 권한 플래그 획득'
+              },
+              {
+                file: 'uid bit설정 권한상승.PNG',
+                alt: 'UID Bit 권한 상승',
+                description: 'UID Bit 설정을 통한 권한 상승 실습'
+              },
+              {
+                file: '스티키 비트 설정.PNG',
+                alt: '스티키 비트 설정',
+                description: '스티키 비트(Sticky Bit) 파일 권한 설정'
+              },
+              {
+                file: 'ossec 연결 가능.PNG',
+                alt: 'OSSEC 연결',
+                description: 'OSSEC HIDS 연결 및 모니터링 활성화'
+              },
+              {
+                file: 'ftp접속 불가능.PNG',
+                alt: 'FTP 접속 차단',
+                description: '보안 정책에 의한 FTP 접속 차단 확인'
+              },
+              {
+                file: 'http 접속가능.PNG',
+                alt: 'HTTP 접속 허용',
+                description: 'HTTP 프로토콜 접속 허용 상태 확인'
+              },
+              {
+                file: 'https접속가능.PNG',
+                alt: 'HTTPS 접속 허용',
+                description: 'HTTPS 보안 접속 허용 상태 확인'
+              },
+              {
+                file: '비밀번호 90일.PNG',
+                alt: '패스워드 정책 90일',
+                description: '패스워드 만료 기간 90일 정책 설정'
+              },
+              {
+                file: '비밀번호 변경.PNG',
+                alt: '패스워드 변경',
+                description: '사용자 패스워드 변경 실행'
+              }
             ])}
           `
         },
         monitoring: {
-          title: '모니터링',
+          title: '모니터링 & 성능 관리',
           content: `
-            <h3>모니터링 & 성능 확인</h3>
-            <p>PMM, Zabbix 등 모니터링 관련 이미지입니다.</p>
+            <h3>시스템 모니터링 및 성능 분석</h3>
+            <p>PMM(Percona Monitoring and Management), Zabbix 등을 활용한 시스템 모니터링 구축 및 데이터베이스 성능 분석 과정을 담은 스크린샷들입니다.</p>
             ${gallery([
-              'pmm client와 R3 통신가능.PNG',
-              'pmm 서버 구축.PNG',
-              'PMM 클라이언트 db확인.PNG',
-              'zabbix 활성화.PNG',
-              'frontend skill조회.PNG'
+              {
+                file: 'pmm client와 R3 통신가능.PNG',
+                alt: 'PMM 클라이언트 통신',
+                description: 'PMM 클라이언트와 R3 라우터 간 통신 연결 확인'
+              },
+              {
+                file: 'pmm 서버 구축.PNG',
+                alt: 'PMM 서버 구축',
+                description: 'Percona Monitoring Management 서버 구축 완료'
+              },
+              {
+                file: 'PMM 클라이언트 db확인.PNG',
+                alt: 'PMM DB 모니터링',
+                description: 'PMM 클라이언트를 통한 데이터베이스 상태 모니터링'
+              },
+              {
+                file: 'zabbix 활성화.PNG',
+                alt: 'Zabbix 모니터링 활성화',
+                description: 'Zabbix 모니터링 시스템 활성화 및 에이전트 연결'
+              },
+              {
+                file: 'frontend skill조회.PNG',
+                alt: '프론트엔드 스킬 조회',
+                description: '모니터링 대시보드에서 기술 스택 정보 조회'
+              }
             ])}
           `
         },
         log: {
-          title: '로그 분석',
+          title: '로그 분석 및 관리',
           content: `
-            <h3>로그/분석</h3>
-            <p>로그 수집/분석 관련 이미지입니다.</p>
+            <h3>시스템 로그 분석 및 보안 이벤트 추적</h3>
+            <p>시스템 로그 분석 도구 구축 및 로그인 기록(wtmp, btmp) 분석을 통한 보안 이벤트 추적 과정을 담은 스크린샷들입니다.</p>
             ${gallery([
-              'log analyzer.PNG',
-              'wtmp.btmp 위치확인.PNG'
+              {
+                file: 'log analyzer.PNG',
+                alt: '로그 분석기',
+                description: '시스템 로그 분석 도구를 통한 로그 파일 분석'
+              },
+              {
+                file: 'wtmp.btmp 위치확인.PNG',
+                alt: 'wtmp/btmp 로그 위치',
+                description: 'wtmp, btmp 로그인 기록 파일 위치 확인 및 분석'
+              }
             ])}
           `
         },
         db: {
-          title: '데이터베이스 (MariaDB 등)',
+          title: '데이터베이스 관리',
           content: `
-            <h3>DB 구축 및 권한</h3>
-            <p>DB 생성, 유저 권한 설정 등 DB 관련 이미지입니다.</p>
+            <h3>MariaDB 데이터베이스 구축 및 권한 관리</h3>
+            <p>MariaDB 데이터베이스 생성, 사용자 계정 관리, 권한 설정 등 데이터베이스 관리 전반의 과정을 담은 스크린샷들입니다.</p>
             ${gallery([
-              'DB dev생성.PNG',
-              'DB skillcode생성.PNG',
-              'DB 생성.PNG',
-              'DB 유저 권한 주기.PNG'
+              {
+                file: 'DB dev생성.PNG',
+                alt: 'Dev DB 생성',
+                description: '개발용 데이터베이스(dev) 생성'
+              },
+              {
+                file: 'DB skillcode생성.PNG',
+                alt: 'SkillCode DB 생성',
+                description: 'SkillCode 프로젝트용 데이터베이스 생성'
+              },
+              {
+                file: 'DB 생성.PNG',
+                alt: '데이터베이스 생성',
+                description: 'MariaDB 새 데이터베이스 생성 과정'
+              },
+              {
+                file: 'DB 유저 권한 주기.PNG',
+                alt: 'DB 사용자 권한 설정',
+                description: '데이터베이스 사용자 계정 권한 부여 설정'
+              }
             ])}
           `
         }
@@ -604,6 +756,44 @@
         nav.classList.remove('transparent');
       } else {
         nav.classList.add('transparent');
+      }
+    });
+
+    // 이미지 클릭 시 확대 기능 (optional)
+    document.addEventListener('click', function(e) {
+      if (e.target.tagName === 'IMG' && e.target.closest('.gallery')) {
+        const img = e.target;
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.9);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        `;
+        
+        const enlargedImg = document.createElement('img');
+        enlargedImg.src = img.src;
+        enlargedImg.alt = img.alt;
+        enlargedImg.style.cssText = `
+          max-width: 90%;
+          max-height: 90%;
+          border-radius: 8px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        `;
+        
+        overlay.appendChild(enlargedImg);
+        document.body.appendChild(overlay);
+        
+        overlay.addEventListener('click', function() {
+          document.body.removeChild(overlay);
+        });
       }
     });
   </script>
