@@ -5,7 +5,7 @@
 function openProjectDetail(projectId) {
   if (projectId === 'project2') {
     // 새 창에서 프로젝트 상세 페이지 열기
-    window.open('project-detail.html', '_blank');
+    window.open('project2', '_blank');
   }
 }
 
