@@ -1,192 +1,12 @@
 // ==========================================
-// 프로젝트 상세 페이지 열기
+// 공통 데이터 (Project 2 상세 내용)
 // ==========================================
 
-function openProjectDetail(projectId) {
-  if (projectId === 'project2') {
-    // project2.html로 이동
-    window.open('project2.html', '_blank');
-  }
-}
-
-// ==========================================
-// 검색 & 필터링 기능
-// ==========================================
-
-function filterProjects() {
-  const searchTermEl = document.getElementById('search');
-  const searchTerm = searchTermEl ? searchTermEl.value.toLowerCase() : '';
-  const activeFilterBtn = document.querySelector('.filter-group .chip.btn.active');
-  const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
-  const projects = document.querySelectorAll('.project');
-  
-  projects.forEach(project => {
-    const tags = (project.dataset.tags || '').toLowerCase();
-    const title = (project.querySelector('h3') ? project.querySelector('h3').textContent.toLowerCase() : '');
-    const desc = (project.querySelector('p') ? project.querySelector('p').textContent.toLowerCase() : '');
-    
-    const matchesSearch = searchTerm === '' || tags.includes(searchTerm) || title.includes(searchTerm) || desc.includes(searchTerm);
-    const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
-    
-    project.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
-  });
-}
-
-// ==========================================
-// 맨 위로 버튼 표시/숨김
-// ==========================================
-
-function toggleBackToTop() {
-  const toTop = document.getElementById('toTop');
-  if (toTop) {
-    toTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-  }
-}
-
-// ==========================================
-// 네비게이션 투명도 조절
-// ==========================================
-
-function handleNavTransparency() {
-  const nav = document.querySelector('.nav');
-  if (nav) {
-    nav.classList.toggle('transparent', window.scrollY <= 50);
-  }
-}
-
-// ==========================================
-// 부드러운 스크롤 초기화
-// ==========================================
-
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-}
-
-// ==========================================
-// 검색 & 필터 이벤트 리스너 초기화
-// ==========================================
-
-function initSearchAndFilters() {
-  const searchInput = document.getElementById('search');
-  const filterButtons = document.querySelectorAll('.filter-group .chip.btn');
-  
-  // 검색 입력 이벤트
-  if (searchInput) {
-    searchInput.addEventListener('input', filterProjects);
-  }
-
-  // 필터 버튼 클릭 이벤트
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      filterProjects();
-    });
-  });
-}
-
-// ==========================================
-// 프로젝트 클릭 이벤트 초기화
-// ==========================================
-
-function initProjectClicks() {
-  const projects = document.querySelectorAll('.project');
-  projects.forEach(project => {
-    project.addEventListener('click', function() {
-      const projectId = this.dataset.project;
-      if (projectId) {
-        openProjectDetail(projectId);
-      }
-    });
-  });
-}
-
-// ==========================================
-// 연락 폼 제출 처리
-// ==========================================
-
-function initContactForm() {
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value;
-      window.location.href = `mailto:you@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-    });
-  }
-}
-
-// ==========================================
-// 맨 위로 버튼 클릭 처리
-// ==========================================
-
-function initBackToTopButton() {
-  const toTopBtn = document.getElementById('toTop');
-  if (toTopBtn) {
-    toTopBtn.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-}
-
-// ==========================================
-// 스크롤 이벤트 통합 처리
-// ==========================================
-
-function handleScroll() {
-  toggleBackToTop();
-  handleNavTransparency();
-}
-
-// ==========================================
-// 페이지 로드 시 초기화
-// ==========================================
-
-document.addEventListener('DOMContentLoaded', function() {
-  // 검색 & 필터 초기화
-  initSearchAndFilters();
-  
-  // 프로젝트 클릭 이벤트
-  initProjectClicks();
-  
-  // 부드러운 스크롤
-  initSmoothScroll();
-  
-  // 연락 폼
-  initContactForm();
-  
-  // 맨 위로 버튼
-  initBackToTopButton();
-  
-  // 스크롤 이벤트 리스너
-  window.addEventListener('scroll', handleScroll);
-  
-  // 초기 상태 설정
-  handleScroll();
-  
-  // 프로젝트 상세 페이지 전용 초기화
-  initProjectDetailPage();
-});
-
-// ==========================================
-// 프로젝트 상세 페이지 전용 기능
-// ==========================================
-
-// 카테고리 데이터
 const categoryData = {
   network: {
     title: '네트워크 구성 및 구축',
     content: `
-      <h3>네트워크 인프라 설계 및 구축</h3>
+      <h3>🌐 네트워크 인프라 설계 및 구축</h3>
       <p>VLAN 설정, 라우터 간 통신, 파일 서버(NFS/SMB) 구축, SSH/FTP 서비스 설정 등 네트워크 인프라 전반의 구축과정을 담은 스크린샷들입니다.</p>
     `,
     images: [
@@ -203,7 +23,7 @@ const categoryData = {
   security: {
     title: '보안솔루션 & 취약점 실습',
     content: `
-      <h3>보안 취약점 분석 및 대응</h3>
+      <h3>🔒 보안 취약점 분석 및 대응</h3>
       <p>BOF(Buffer Overflow) 공격, CTF 문제 해결, 권한 상승, 접근 제어, 패스워드 정책 등 보안 관련 실습 과정입니다.</p>
     `,
     images: [
@@ -223,7 +43,7 @@ const categoryData = {
   monitoring: {
     title: '모니터링 & 성능 관리',
     content: `
-      <h3>시스템 모니터링 및 성능 분석</h3>
+      <h3>📊 시스템 모니터링 및 성능 분석</h3>
       <p>PMM, Zabbix 등을 활용한 시스템 모니터링 구축 과정입니다.</p>
     `,
     images: [
@@ -237,7 +57,7 @@ const categoryData = {
   log: {
     title: '로그 분석 및 관리',
     content: `
-      <h3>시스템 로그 분석 및 보안 이벤트 추적</h3>
+      <h3>📝 시스템 로그 분석 및 보안 이벤트 추적</h3>
       <p>로그 분석 도구 구축 및 로그인 기록 분석입니다.</p>
     `,
     images: [
@@ -248,7 +68,7 @@ const categoryData = {
   db: {
     title: '데이터베이스 관리',
     content: `
-      <h3>MariaDB 데이터베이스 구축 및 권한 관리</h3>
+      <h3>🗄️ MariaDB 데이터베이스 구축 및 권한 관리</h3>
       <p>MariaDB 생성, 사용자 계정 관리, 권한 설정 등입니다.</p>
     `,
     images: [
@@ -259,6 +79,11 @@ const categoryData = {
     ]
   }
 };
+
+
+// ==========================================
+// Project 2 상세 페이지 기능 (New Logic)
+// ==========================================
 
 function createGalleryHTML(images) {
   if (!images || images.length === 0) {
@@ -280,31 +105,46 @@ function createGalleryHTML(images) {
   return `<div class="gallery">${galleryItems}</div>`;
 }
 
-function showCategory(category) {
-  const categoryContent = document.getElementById('categoryContent');
-  const categoryTitle = document.getElementById('categoryTitle');
-  const categoryDetails = document.getElementById('categoryDetails');
+function renderAllCategoryDetails() {
+  const container = document.getElementById('projectDetailsContainer');
+  if (!container) return;
   
-  if (!categoryContent || !categoryTitle || !categoryDetails) return;
+  let allContent = '';
+  const categoryOrder = ['network', 'security', 'monitoring', 'log', 'db']; 
   
-  const data = categoryData[category];
+  categoryOrder.forEach(categoryKey => {
+    const data = categoryData[categoryKey];
+    if (data) {
+      allContent += `
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="inner">
+            <h2 style="margin-top:0; border-bottom: 2px solid #222; padding-bottom: 0.5rem;">${data.title}</h2>
+            <div>
+              ${data.content}
+              ${createGalleryHTML(data.images)}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  });
   
-  if (data) {
-    categoryTitle.textContent = data.title;
-    categoryDetails.innerHTML = data.content + createGalleryHTML(data.images);
-    categoryContent.style.display = 'block';
-    categoryContent.scrollIntoView({ behavior: 'smooth' });
-    
-    // 이미지 클릭 이벤트 재등록
-    attachImageClickEvents();
-  }
+  container.innerHTML = allContent;
+  attachImageClickEvents();
 }
 
+
+// ==========================================
+// 이미지 모달 & 이벤트 (공통)
+// ==========================================
+
 function attachImageClickEvents() {
-  const images = document.querySelectorAll('.gallery img');
+  // .gallery 내부 이미지와 .project-img 클래스를 가진 이미지에 클릭 이벤트 등록
+  const images = document.querySelectorAll('.gallery img, .project-img');
   images.forEach(img => {
+    const srcToOpen = img.getAttribute('data-src') || img.getAttribute('src');
     img.addEventListener('click', function() {
-      openImageModal(this.getAttribute('data-src'));
+      openImageModal(srcToOpen);
     });
   });
 }
@@ -325,21 +165,7 @@ function closeImageModal() {
   }
 }
 
-function initProjectDetailPage() {
-  // 카테고리 네비게이션이 있으면 프로젝트 상세 페이지
-  const categoryItems = document.querySelectorAll('.category-item');
-  if (categoryItems.length === 0) return;
-  
-  categoryItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      const category = this.getAttribute('data-category');
-      if (category) {
-        showCategory(category);
-      }
-    });
-  });
-  
+function initImageModal() {
   // 모달 클릭 시 닫기
   const modal = document.getElementById('imageModal');
   if (modal) {
@@ -353,3 +179,113 @@ function initProjectDetailPage() {
     }
   });
 }
+
+function initProject2DetailPage() {
+  // project2.html에서 실행
+  renderAllCategoryDetails(); 
+  initImageModal();
+}
+
+
+// ==========================================
+// 메인 페이지 기능 (기존 로직 복구)
+// ==========================================
+
+// 프로젝트 상세 페이지 열기 (main.html에서 사용)
+function openProjectDetail(projectId) {
+  if (projectId === 'project2') {
+    // project2.html로 이동
+    window.open('project2.html', '_self'); // '_self'로 변경하여 현재 탭에서 열도록 수정
+  } else if (projectId === 'project3') {
+    window.open('project3.html', '_self');
+  }
+  // 다른 프로젝트 ID가 있다면 여기에 추가
+}
+
+// 검색 & 필터링 기능 (main.html에서 사용)
+function filterProjects() {
+  const searchTermEl = document.getElementById('search');
+  const searchTerm = searchTermEl ? searchTermEl.value.toLowerCase() : '';
+  const activeFilterBtn = document.querySelector('.filter-group .chip.btn.active');
+  const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
+  const projects = document.querySelectorAll('.project');
+  
+  projects.forEach(project => {
+    const tags = (project.dataset.tags || '').toLowerCase();
+    const title = (project.querySelector('h3') ? project.querySelector('h3').textContent.toLowerCase() : '');
+    const desc = (project.querySelector('p') ? project.querySelector('p').textContent.toLowerCase() : '');
+    
+    const matchesSearch = searchTerm === '' || tags.includes(searchTerm) || title.includes(searchTerm) || desc.includes(searchTerm);
+    const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+    
+    project.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+  });
+}
+
+// ==========================================
+// 맨 위로 버튼 표시/숨김 (공통)
+// ==========================================
+
+function toggleBackToTop() {
+  const toTop = document.getElementById('toTop');
+  if (toTop) {
+    toTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+  }
+}
+
+
+// ==========================================
+// DOMContentLoaded 이벤트 리스너 (페이지별 초기화)
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  const toTopBtn = document.getElementById('toTop');
+  
+  // 1. 공통 기능: 맨 위로 버튼 설정
+  if (toTopBtn) {
+    toTopBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  window.addEventListener('scroll', toggleBackToTop);
+  toggleBackToTop(); // 초기 상태 설정
+
+  // 2. 페이지별 기능 초기화
+  
+  // A. main.html 페이지 기능 초기화
+  if (document.title.includes('Lee Seok Hyun | Portfolio')) {
+    // 프로젝트 필터/검색 기능 연결
+    document.querySelectorAll('.filter-group .chip.btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelector('.filter-group .chip.btn.active')?.classList.remove('active');
+        this.classList.add('active');
+        filterProjects();
+      });
+    });
+    
+    document.getElementById('search')?.addEventListener('input', filterProjects);
+    
+    // 프로젝트 카드 클릭 이벤트 연결
+    document.querySelectorAll('.project-head').forEach(head => {
+      head.addEventListener('click', function() {
+        const article = this.closest('.project');
+        if (article) {
+          const projectId = article.id || article.querySelector('[data-project-id]')?.dataset.projectId;
+          if (projectId) openProjectDetail(projectId);
+        }
+      });
+    });
+  } 
+
+  // B. project2.html 페이지 기능 초기화
+  if (document.title.includes('네트워크 및 보안 실습')) {
+    initProject2DetailPage();
+  }
+  
+  // C. project3.html 페이지 기능 초기화 (제목 기반으로 구분)
+  if (document.title.includes('방화벽(ASAv) 정책 실습')) {
+    // project2와 동일하게 스크롤 페이지이므로, 이미지 모달만 초기화
+    attachImageClickEvents(); 
+    initImageModal(); 
+  }
+});
