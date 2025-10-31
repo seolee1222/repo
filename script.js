@@ -106,6 +106,7 @@ function createGalleryHTML(images) {
   return `<div class="gallery">${galleryItems}</div>`;
 }
 
+// 모든 카테고리를 순차적으로 표시하고 이미지를 연결하는 핵심 함수
 function renderAllCategoryDetails() {
   const container = document.getElementById('projectDetailsContainer');
   if (!container) return;
@@ -146,7 +147,7 @@ function openProjectDetail(projectId) {
   window.open(`${projectId}.html`, '_self');
 }
 
-// 검색 & 필터링 기능 (main.html에서 사용) - 기존 로직 유지
+// 검색 & 필터링 기능 (main.html에서 사용)
 function filterProjects() {
   const searchTermEl = document.getElementById('search');
   const searchTerm = searchTermEl ? searchTermEl.value.toLowerCase() : '';
@@ -176,6 +177,7 @@ function toggleBackToTop() {
 
 // 이미지 모달 & 이벤트 (공통)
 function attachImageClickEvents() {
+  // .gallery 내부 이미지와 .project-img 클래스를 가진 이미지에 클릭 이벤트 등록
   const images = document.querySelectorAll('.gallery img, .project-img');
   images.forEach(img => {
     const srcToOpen = img.getAttribute('data-src') || img.getAttribute('src');
@@ -248,8 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.getElementById('search')?.addEventListener('input', filterProjects);
-    
-    // *주의: main.html의 프로젝트 카드는 HTML의 onclick="openProjectDetail(...)"로 연결되었습니다.
   } 
 
   // B. project2.html 페이지 기능 초기화
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initProject2DetailPage();
   }
   
-  // C. project3.html 페이지 기능 초기화 (추가했다면)
+  // C. project3.html 페이지 기능 초기화 (제목 기반으로 판단)
   if (document.title.includes('방화벽(ASAv) 정책 실습')) {
     attachImageClickEvents(); 
     initImageModal(); 
