@@ -82,7 +82,7 @@ const categoryData = {
 
 
 // ==========================================
-// Project 2 상세 페이지 기능 (New Logic)
+// Project 2 상세 페이지 기능
 // ==========================================
 
 function createGalleryHTML(images) {
@@ -90,6 +90,7 @@ function createGalleryHTML(images) {
     return '<p>등록된 이미지가 없습니다.</p>';
   }
   
+  // 주의: 이미지 경로는 'pj2/' 폴더를 가정합니다.
   const galleryItems = images.map(item => `
     <div class="gallery-item">
       <img 
@@ -110,6 +111,7 @@ function renderAllCategoryDetails() {
   if (!container) return;
   
   let allContent = '';
+  // 카테고리 순서 정의
   const categoryOrder = ['network', 'security', 'monitoring', 'log', 'db']; 
   
   categoryOrder.forEach(categoryKey => {
@@ -135,11 +137,45 @@ function renderAllCategoryDetails() {
 
 
 // ==========================================
-// 이미지 모달 & 이벤트 (공통)
+// Main Page & Common Functions
 // ==========================================
 
+// 프로젝트 상세 페이지 열기 (main.html에서 사용)
+function openProjectDetail(projectId) {
+  // main.html의 onclick 이벤트와 연결됩니다.
+  window.open(`${projectId}.html`, '_self');
+}
+
+// 검색 & 필터링 기능 (main.html에서 사용) - 기존 로직 유지
+function filterProjects() {
+  const searchTermEl = document.getElementById('search');
+  const searchTerm = searchTermEl ? searchTermEl.value.toLowerCase() : '';
+  const activeFilterBtn = document.querySelector('.filter-group .chip.btn.active');
+  const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
+  const projects = document.querySelectorAll('.project');
+  
+  projects.forEach(project => {
+    const tags = (project.dataset.tags || '').toLowerCase();
+    const title = (project.querySelector('h3') ? project.querySelector('h3').textContent.toLowerCase() : '');
+    const desc = (project.querySelector('p') ? project.querySelector('p').textContent.toLowerCase() : '');
+    
+    const matchesSearch = searchTerm === '' || tags.includes(searchTerm) || title.includes(searchTerm) || desc.includes(searchTerm);
+    const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+    
+    project.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+  });
+}
+
+// 맨 위로 버튼 표시/숨김 (공통)
+function toggleBackToTop() {
+  const toTop = document.getElementById('toTop');
+  if (toTop) {
+    toTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+  }
+}
+
+// 이미지 모달 & 이벤트 (공통)
 function attachImageClickEvents() {
-  // .gallery 내부 이미지와 .project-img 클래스를 가진 이미지에 클릭 이벤트 등록
   const images = document.querySelectorAll('.gallery img, .project-img');
   images.forEach(img => {
     const srcToOpen = img.getAttribute('data-src') || img.getAttribute('src');
@@ -166,13 +202,10 @@ function closeImageModal() {
 }
 
 function initImageModal() {
-  // 모달 클릭 시 닫기
   const modal = document.getElementById('imageModal');
   if (modal) {
     modal.addEventListener('click', closeImageModal);
   }
-  
-  // ESC 키로 모달 닫기
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeImageModal();
@@ -181,58 +214,9 @@ function initImageModal() {
 }
 
 function initProject2DetailPage() {
-  // project2.html에서 실행
   renderAllCategoryDetails(); 
   initImageModal();
 }
-
-
-// ==========================================
-// 메인 페이지 기능 (기존 로직 복구)
-// ==========================================
-
-// 프로젝트 상세 페이지 열기 (main.html에서 사용)
-function openProjectDetail(projectId) {
-  if (projectId === 'project2') {
-    // project2.html로 이동
-    window.open('project2.html', '_self'); // '_self'로 변경하여 현재 탭에서 열도록 수정
-  } else if (projectId === 'project3') {
-    window.open('project3.html', '_self');
-  }
-  // 다른 프로젝트 ID가 있다면 여기에 추가
-}
-
-// 검색 & 필터링 기능 (main.html에서 사용)
-function filterProjects() {
-  const searchTermEl = document.getElementById('search');
-  const searchTerm = searchTermEl ? searchTermEl.value.toLowerCase() : '';
-  const activeFilterBtn = document.querySelector('.filter-group .chip.btn.active');
-  const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
-  const projects = document.querySelectorAll('.project');
-  
-  projects.forEach(project => {
-    const tags = (project.dataset.tags || '').toLowerCase();
-    const title = (project.querySelector('h3') ? project.querySelector('h3').textContent.toLowerCase() : '');
-    const desc = (project.querySelector('p') ? project.querySelector('p').textContent.toLowerCase() : '');
-    
-    const matchesSearch = searchTerm === '' || tags.includes(searchTerm) || title.includes(searchTerm) || desc.includes(searchTerm);
-    const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
-    
-    project.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
-  });
-}
-
-// ==========================================
-// 맨 위로 버튼 표시/숨김 (공통)
-// ==========================================
-
-function toggleBackToTop() {
-  const toTop = document.getElementById('toTop');
-  if (toTop) {
-    toTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-  }
-}
-
 
 // ==========================================
 // DOMContentLoaded 이벤트 리스너 (페이지별 초기화)
@@ -248,11 +232,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   window.addEventListener('scroll', toggleBackToTop);
-  toggleBackToTop(); // 초기 상태 설정
+  toggleBackToTop(); 
 
   // 2. 페이지별 기능 초기화
   
-  // A. main.html 페이지 기능 초기화
+  // A. main.html 페이지 기능 초기화 (제목 기반으로 판단)
   if (document.title.includes('Lee Seok Hyun | Portfolio')) {
     // 프로젝트 필터/검색 기능 연결
     document.querySelectorAll('.filter-group .chip.btn').forEach(btn => {
@@ -265,16 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('search')?.addEventListener('input', filterProjects);
     
-    // 프로젝트 카드 클릭 이벤트 연결
-    document.querySelectorAll('.project-head').forEach(head => {
-      head.addEventListener('click', function() {
-        const article = this.closest('.project');
-        if (article) {
-          const projectId = article.id || article.querySelector('[data-project-id]')?.dataset.projectId;
-          if (projectId) openProjectDetail(projectId);
-        }
-      });
-    });
+    // *주의: main.html의 프로젝트 카드는 HTML의 onclick="openProjectDetail(...)"로 연결되었습니다.
   } 
 
   // B. project2.html 페이지 기능 초기화
@@ -282,9 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initProject2DetailPage();
   }
   
-  // C. project3.html 페이지 기능 초기화 (제목 기반으로 구분)
+  // C. project3.html 페이지 기능 초기화 (추가했다면)
   if (document.title.includes('방화벽(ASAv) 정책 실습')) {
-    // project2와 동일하게 스크롤 페이지이므로, 이미지 모달만 초기화
     attachImageClickEvents(); 
     initImageModal(); 
   }
