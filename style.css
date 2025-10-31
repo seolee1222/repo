@@ -508,41 +508,41 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
 /* ==========================================
-   프로젝트 상세 페이지 스타일
+   프로젝트 상세 페이지 추가 스타일
    ========================================== */
 
+/* 네비게이션 상세 */
 .nav-detail {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.nav-detail .title {
-  font-size: 2rem; /* 제목 크기 조정 */
-  margin-bottom: 0;
-}
-
+/* 카테고리 네비게이션 */
 .category-nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* 반응형 그리드 */
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1.25rem 0; /* 컨테이너 내부 여백 확보 */
+  margin: 2rem 0;
 }
 
 .category-item {
-  display: block;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
   text-decoration: none;
   color: var(--text);
-  background: var(--card);
-  border-radius: var(--radius);
   box-shadow: var(--shadow);
-  border: 1px solid var(--line);
-  padding: 1.2rem;
-  text-align: center;
-  transition: 0.25s;
+  display: block;
 }
 
 .category-item:hover {
@@ -552,34 +552,71 @@ textarea {
 }
 
 .category-icon {
-  font-size: 2.2rem;
-  margin-bottom: 0.4rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 .category-title {
   font-weight: 800;
   font-size: 1.1rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
+  display: block;
 }
 
 .category-desc {
   font-size: 0.9rem;
   color: var(--muted);
+  display: block;
 }
 
-/* 이미지 모달 스타일 */
+/* 갤러리 (이미지 그리드) */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  transform: scale(1.02);
+}
+
+.image-caption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* 이미지 모달 (확대 보기) */
 .modal {
-  display: none;
   position: fixed;
-  z-index: 200;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
   cursor: pointer;
 }
 
@@ -588,48 +625,19 @@ textarea {
 }
 
 .modal-img {
-  margin: auto;
-  display: block;
   max-width: 90%;
   max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* 갤러리 스타일 */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.gallery-item {
-  background: #fcfcfc;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  transition: 0.2s;
-}
-
-.gallery-item:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
-}
-
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-
-.image-caption {
-  padding: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-  text-align: center;
-  font-style: italic;
+/* 반응형 추가 */
+@media (max-width: 640px) {
+  .category-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .gallery {
+    grid-template-columns: 1fr;
+  }
 }
