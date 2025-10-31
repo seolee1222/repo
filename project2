@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>네트워크 및 보안 실습 | Lee Seok Hyun Portfolio</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary:#222; --text:#1d1d1f; --muted:#666; --bg:#f7f7f8; --card:#ffffff; --line:#e6e6e6; --radius:16px; --shadow:0 4px 20px rgba(0,0,0,.08); --shadow-lg:0 8px 30px rgba(0,0,0,.15)
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text);background:var(--bg)}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .header{background:#0f0f10;color:#fff;padding:2.5rem 0;position:relative;overflow:hidden}
+    .header::before{content:"";position:absolute;inset:0;opacity:.16;background-image: radial-gradient(#fff 1px, transparent 1px);background-size:3px 3px}
+    .nav-detail{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+    .back-btn{background:#fff;color:#222;border:none;border-radius:999px;padding:.6rem 1.2rem;font-weight:800;cursor:pointer;transition:.25s;text-decoration:none}
+    .back-btn:hover{background:#f0f0f0;transform:translateY(-2px)}
+    .title{font-size:2rem;font-weight:900}
+    .subtitle{font-size:1rem;opacity:.9;margin-top:.5rem}
+    main{margin:2rem 0}
+    .category-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin:2rem 0}
+    .category-item{background:#fff;border:2px solid #e6e6e6;border-radius:16px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:.25s;text-decoration:none;color:var(--text);box-shadow:var(--shadow)}
+    .category-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#222}
+    .category-icon{font-size:2rem;margin-bottom:.5rem}
+    .category-title{font-weight:800;font-size:1.1rem;margin-bottom:.3rem}
+    .category-desc{font-size:.9rem;color:var(--muted)}
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);padding:2rem}
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+    .gallery-item{display:flex;flex-direction:column;gap:8px}
+    .gallery img{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);transition:transform 0.3s ease;cursor:pointer}
+    .gallery img:hover{transform:scale(1.02)}
+    .image-caption{font-size:0.85rem;color:var(--muted);text-align:center;font-weight:500;line-height:1.4}
+    .footer{background:#0f0f10;color:#fff;text-align:center;padding:2rem 0;margin-top:3rem}
+    @media (max-width:640px){
+      .category-nav{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:1fr}
+      .title{font-size:1.5rem}
+    }
+    /* 이미지 확대 */
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:9999}
+    .modal.active{display:flex}
+    .modal-img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="nav-detail">
+        <h1 class="title">네트워크 및 보안 실습</h1>
+        <a href="javascript:window.history.back()" class="back-btn">← 돌아가기</a>
+      </div>
+      <p class="subtitle">세부 카테고리별 상세 내용 및 구축 스크린샷</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="category-nav">
+      <a href="#" class="category-item" onclick="showCategory('network'); return false;">
+        <div class="category-icon">🌐</div>
+        <div class="category-title">네트워크</div>
+        <div class="category-desc">라우팅, 스위칭, VLAN 구성</div>
+      </a>
+      <a href="#" class="category-item" onclick="showCategory('security'); return false;">
+        <div class="category-icon">🔒</div>
+        <div class="category-title">보안솔루션</div>
+        <div class="category-desc">방화벽, 접근제어, 취약점 실습</div>
+      </a>
+      <a href="#" class="category-item" onclick="showCategory('monitoring'); return false;">
+        <div class="category-icon">📊</div>
+        <div class="category-title">모니터링</div>
+        <div class="category-desc">Zabbix, PMM 등</div>
+      </a>
+      <a href="#" class="category-item" onclick="showCategory('log'); return false;">
+        <div class="category-icon">📝</div>
+        <div class="category-title">로그</div>
+        <div class="category-desc">로그 분석 관련</div>
+      </a>
+      <a href="#" class="category-item" onclick="showCategory('db'); return false;">
+        <div class="category-icon">🗄️</div>
+        <div class="category-title">DB</div>
+        <div class="category-desc">MariaDB 관련</div>
+      </a>
+    </div>
+
+    <div id="categoryContent" class="card" style="display:none;">
+      <h2 id="categoryTitle">카테고리 선택</h2>
+      <div id="categoryDetails">
+        <p>위에서 카테고리를 선택하면 해당 분야의 상세 내용이 표시됩니다.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Lee Seok Hyun. All rights reserved.</p>
+  </footer>
+
+  <div id="imageModal" class="modal">
+    <img id="modalImage" class="modal-img" alt="">
+  </div>
+
+  <script>
+    function showCategory(category) {
+      const categoryContent = document.getElementById('categoryContent');
+      const categoryTitle = document.getElementById('categoryTitle');
+      const categoryDetails = document.getElementById('categoryDetails');
+
+      const gallery = (images) => {
+        if (!images || images.length === 0) return '<p>등록된 이미지가 없습니다.</p>';
+        return `<div class="gallery">` + 
+          images.map(item => `
+            <div class="gallery-item">
+              <img src="pj2/${item.file}" alt="${item.alt}" title="${item.description}" onclick="openImageModal(this.src)">
+              <div class="image-caption">${item.description}</div>
+            </div>
+          `).join('') + 
+          `</div>`;
+      };
+
+      const categories = {
+        network: {
+          title: '네트워크 구성 및 구축',
+          content: `
+            <h3>네트워크 인프라 설계 및 구축</h3>
+            <p>VLAN 설정, 라우터 간 통신, 파일 서버(NFS/SMB) 구축, SSH/FTP 서비스 설정 등 네트워크 인프라 전반의 구축과정을 담은 스크린샷들입니다.</p>
+            ${gallery([
+              {file: 'vlan 설정.PNG', alt: 'VLAN 설정 화면', description: 'VLAN 10, 20, 30 구성 및 설정 완료'},
+              {file: 'vlan 10,20,30설정완료후 10에서 20,30통신.PNG', alt: 'VLAN 간 통신 테스트', description: 'VLAN 10에서 20, 30번 VLAN으로 통신 테스트 성공'},
+              {file: 'r2 r4 로ssh 접속가능.PNG', alt: 'SSH 접속 성공', description: 'R2에서 R4로 SSH 원격 접속 가능 확인'},
+              {file: 'r2 에서 R3 ssh정책 주기전.PNG', alt: 'SSH 정책 설정 전', description: 'R2에서 R3 SSH 보안 정책 적용 전 상태'},
+              {file: 'nfs 구축.PNG', alt: 'NFS 서버 구축', description: 'NFS 파일 서버 구축 및 설정 완료'},
+              {file: 'smbshare 서버 구축 및 활성화.PNG', alt: 'SMB 서버 구축', description: 'SMB Share 서버 구축 및 서비스 활성화'},
+              {file: '인사이드에서 텔넷.PNG', alt: '텔넷 접속', description: '내부 네트워크에서 텔넷 접속 테스트'},
+              {file: 'ftp 서버 구축 파일질라 cmd통신 성공.PNG', alt: 'FTP 서버 구축', description: 'FTP 서버 구축 및 FileZilla, CMD 통신 테스트 성공'}
+            ])}
+          `
+        },
+        security: {
+          title: '보안솔루션 & 취약점 실습',
+          content: `
+            <h3>보안 취약점 분석 및 대응</h3>
+            <p>BOF(Buffer Overflow) 공격, CTF 문제 해결, 권한 상승, 접근 제어, 패스워드 정책 등 보안 관련 실습 과정입니다.</p>
+            ${gallery([
+              {file: 'bof 발생시키기.PNG', alt: 'Buffer Overflow 실습', description: 'BOF(Buffer Overflow) 취약점 발생 시키기 실습'},
+              {file: 'ctf userflag.PNG', alt: 'CTF User Flag', description: 'CTF 해킹 대회 - User Flag 획득 성공'},
+              {file: 'venus root플래그.PNG', alt: 'Venus Root Flag', description: 'Venus 시스템 - Root 권한 플래그 획득'},
+              {file: 'uid bit설정 권한상승.PNG', alt: 'UID Bit 권한 상승', description: 'UID Bit 설정을 통한 권한 상승 실습'},
+              {file: '스티키 비트 설정.PNG', alt: '스티키 비트 설정', description: '스티키 비트(Sticky Bit) 파일 권한 설정'},
+              {file: 'ossec 연결 가능.PNG', alt: 'OSSEC 연결', description: 'OSSEC HIDS 연결 및 모니터링 활성화'},
+              {file: 'ftp접속 불가능.PNG', alt: 'FTP 접속 차단', description: '보안 정책에 의한 FTP 접속 차단 확인'},
+              {file: 'http 접속가능.PNG', alt: 'HTTP 접속 허용', description: 'HTTP 프로토콜 접속 허용 상태 확인'},
+              {file: 'https접속가능.PNG', alt: 'HTTPS 접속 허용', description: 'HTTPS 보안 접속 허용 상태 확인'},
+              {file: '비밀번호 90일.PNG', alt: '패스워드 정책 90일', description: '패스워드 만료 기간 90일 정책 설정'},
+              {file: '비밀번호 변경.PNG', alt: '패스워드 변경', description: '사용자 패스워드 변경 실행'}
+            ])}
+          `
+        },
+        monitoring: {
+          title: '모니터링 & 성능 관리',
+          content: `
+            <h3>시스템 모니터링 및 성능 분석</h3>
+            <p>PMM, Zabbix 등을 활용한 시스템 모니터링 구축 과정입니다.</p>
+            ${gallery([
+              {file: 'pmm client와 R3 통신가능.PNG', alt: 'PMM 클라이언트 통신', description: 'PMM 클라이언트와 R3 라우터 간 통신 연결 확인'},
+              {file: 'pmm 서버 구축.PNG', alt: 'PMM 서버 구축', description: 'Percona Monitoring Management 서버 구축 완료'},
+              {file: 'PMM 클라이언트 db확인.PNG', alt: 'PMM DB 모니터링', description: 'PMM 클라이언트를 통한 데이터베이스 상태 모니터링'},
+              {file: 'zabbix 활성화.PNG', alt: 'Zabbix 모니터링 활성화', description: 'Zabbix 모니터링 시스템 활성화 및 에이전트 연결'},
+              {file: 'frontend skill조회.PNG', alt: '프론트엔드 스킬 조회', description: '모니터링 대시보드에서 기술 스택 정보 조회'}
+            ])}
+          `
+        },
+        log: {
+          title: '로그 분석 및 관리',
+          content: `
+            <h3>시스템 로그 분석 및 보안 이벤트 추적</h3>
+            <p>로그 분석 도구 구축 및 로그인 기록 분석입니다.</p>
+            ${gallery([
+              {file: 'log analyzer.PNG', alt: '로그 분석기', description: '시스템 로그 분석 도구를 통한 로그 파일 분석'},
+              {file: 'wtmp.btmp 위치확인.PNG', alt: 'wtmp/btmp 로그 위치', description: 'wtmp, btmp 로그인 기록 파일 위치 확인 및 분석'}
+            ])}
+          `
+        },
+        db: {
+          title: '데이터베이스 관리',
+          content: `
+            <h3>MariaDB 데이터베이스 구축 및 권한 관리</h3>
+            <p>MariaDB 생성, 사용자 계정 관리, 권한 설정 등입니다.</p>
+            ${gallery([
+              {file: 'DB dev생성.PNG', alt: 'Dev DB 생성', description: '개발용 데이터베이스(dev) 생성'},
+              {file: 'DB skillcode생성.PNG', alt: 'SkillCode DB 생성', description: 'SkillCode 프로젝트용 데이터베이스 생성'},
+              {file: 'DB 생성.PNG', alt: '데이터베이스 생성', description: 'MariaDB 새 데이터베이스 생성 과정'},
+              {file: 'DB 유저 권한 주기.PNG', alt: 'DB 사용자 권한 설정', description: '데이터베이스 사용자 계정 권한 부여 설정'}
+            ])}
+          `
+        }
+      };
+
+      const categoryData = categories[category];
+      if (categoryData) {
+        categoryTitle.textContent = categoryData.title;
+        categoryDetails.innerHTML = categoryData.content;
+        categoryContent.style.display = 'block';
+        categoryContent.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function openImageModal(src) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = src;
+      modal.classList.add('active');
+    }
+
+    document.getElementById('imageModal').addEventListener('click', function() {
+      this.classList.remove('active');
+    });
+
+    // ESC 키로 닫기
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('imageModal').classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
