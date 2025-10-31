@@ -72,120 +72,6 @@
     #toTop{position:fixed;right:18px;bottom:18px;border:none;border-radius:999px;padding:.7rem 1rem;background:#222;color:#fff;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;display:none}
     #toTop:hover{background:#000;transform:translateY(-2px)}
     img.project-img{width:100%;margin-top:.6rem;border-radius:12px;border:1px solid var(--line)}
-    .project-detail{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:#fff;
-      z-index:1000;
-      overflow-y:auto;
-      display:none;
-    }
-    .project-detail.show{
-      display:block;
-    }
-    .project-detail .header{
-      background:#0f0f10;
-      color:#fff;
-      padding:2rem 0;
-      position:sticky;
-      top:0;
-      z-index:100;
-    }
-    .project-detail .nav-detail{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:1rem;
-    }
-    .close-btn{
-      background:#fff;
-      color:#222;
-      border:none;
-      border-radius:999px;
-      padding:.6rem 1.2rem;
-      font-weight:800;
-      cursor:pointer;
-      transition:.25s;
-    }
-    .close-btn:hover{
-      background:#f0f0f0;
-      transform:translateY(-2px);
-    }
-    .category-nav{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:1rem;
-      margin:2rem 0;
-    }
-    .category-item{
-      background:#fff;
-      border:2px solid #e6e6e6;
-      border-radius:16px;
-      padding:1.5rem 1rem;
-      text-align:center;
-      cursor:pointer;
-      transition:.25s;
-      text-decoration:none;
-      color:var(--text);
-      box-shadow:var(--shadow);
-    }
-    .category-item:hover{
-      transform:translateY(-4px);
-      box-shadow:var(--shadow-lg);
-      border-color:#222;
-    }
-    .category-icon{
-      font-size:2rem;
-      margin-bottom:.5rem;
-      display:block;
-    }
-    .category-title{
-      font-weight:800;
-      font-size:1.1rem;
-      margin-bottom:.3rem;
-    }
-    .category-desc{
-      font-size:.9rem;
-      color:var(--muted);
-    }
-    .gallery { 
-      display:grid; 
-      grid-template-columns:repeat(2,1fr); 
-      gap:16px; 
-      margin-top:16px; 
-    }
-    .gallery-item {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .gallery img { 
-      width:100%; 
-      height:auto; 
-      border-radius:8px; 
-      border:1px solid var(--line);
-      transition: transform 0.3s ease;
-    }
-    .gallery img:hover {
-      transform: scale(1.02);
-      cursor: pointer;
-    }
-    .image-caption {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-align: center;
-      font-weight: 500;
-      line-height: 1.4;
-    }
-    @media (max-width:640px){
-      .category-nav{
-        grid-template-columns:repeat(2,1fr);
-      }
-      .gallery { grid-template-columns:1fr; }
-    }
   </style>
 </head>
 <body>
@@ -280,8 +166,8 @@
         </div>
       </div>
 
-      <!-- 프로젝트: 프로젝트1 (의도적으로 내용 없음) -->
       <div class="projects" aria-live="polite">
+        <!-- 프로젝트1 -->
         <article class="project" data-tags="" data-project="project1">
           <div class="thumb">프로젝트1</div>
           <div class="inner">
@@ -291,8 +177,8 @@
           </div>
         </article>
 
-        <!-- 프로젝트: 프로젝트2 (카테고리별 이미지 보관) -->
-        <article class="project" data-tags="network security monitoring db log" data-project="project2">
+        <!-- 프로젝트2 - 새 페이지로 열기 -->
+        <article class="project" data-tags="network security monitoring db log" data-project="project2" onclick="openProjectDetail('project2')">
           <div class="thumb">프로젝트2</div>
           <div class="inner">
             <div class="meta"><span>2025</span><span>Various</span><span class="badge">Portfolio</span></div>
@@ -337,58 +223,6 @@
     </section>
   </main>
 
-  <!-- Project Detail Modal -->
-  <div id="projectDetail" class="project-detail" role="dialog" aria-hidden="true">
-    <header class="header">
-      <div class="container">
-        <div class="nav-detail">
-          <h1 id="projectTitle" class="title">프로젝트</h1>
-          <button class="close-btn" onclick="closeProjectDetail(); return false;">✕ 닫기</button>
-        </div>
-        <p class="subtitle">세부 카테고리별 상세 내용 및 구축 스크린샷</p>
-      </div>
-    </header>
-    
-    <main class="container">
-      <div class="category-nav">
-        <a href="#" class="category-item" onclick="showCategory('network'); return false;">
-          <span class="category-icon">🌐</span>
-          <div class="category-title">네트워크</div>
-          <div class="category-desc">라우팅, 스위칭, VLAN 구성, NFS, SMB 등</div>
-        </a>
-        <a href="#" class="category-item" onclick="showCategory('security'); return false;">
-          <span class="category-icon">🔒</span>
-          <div class="category-title">보안솔루션</div>
-          <div class="category-desc">방화벽, 접근제어, 취약점 실습</div>
-        </a>
-        <a href="#" class="category-item" onclick="showCategory('monitoring'); return false;">
-          <span class="category-icon">📊</span>
-          <div class="category-title">모니터링</div>
-          <div class="category-desc">Zabbix, PMM 등</div>
-        </a>
-        <a href="#" class="category-item" onclick="showCategory('log'); return false;">
-          <span class="category-icon">📝</span>
-          <div class="category-title">로그</div>
-          <div class="category-desc">로그 분석 관련</div>
-        </a>
-        <a href="#" class="category-item" onclick="showCategory('db'); return false;">
-          <span class="category-icon">🗄️</span>
-          <div class="category-title">DB</div>
-          <div class="category-desc">MariaDB 관련 이미지</div>
-        </a>
-      </div>
-
-      <div id="categoryContent" class="card" style="margin-top: 2rem; display: none;">
-        <div class="inner">
-          <h2 id="categoryTitle">카테고리 선택</h2>
-          <div id="categoryDetails">
-            <p>위에서 카테고리를 선택하면 해당 분야의 상세 내용(이미지)이 표시됩니다.</p>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
   <footer class="footer">
     <div class="container">
       <p>&copy; 2025 Lee Seok Hyun. All rights reserved.</p>
@@ -398,22 +232,18 @@
   <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <script>
-    // Project click handler
-    document.addEventListener('DOMContentLoaded', function() {
-      const projects = document.querySelectorAll('.project');
-      projects.forEach(project => {
-        project.addEventListener('click', function() {
-          const projectId = this.dataset.project;
-          const projectTitle = this.querySelector('h3').textContent;
-          openProjectDetail(projectId, projectTitle);
-        });
-      });
+    function openProjectDetail(projectId) {
+      if (projectId === 'project2') {
+        // 새 창에서 프로젝트 상세 페이지 열기
+        window.open('project-detail.html', '_blank');
+      }
+    }
 
-      // Search and filter functionality
+    // Search and filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
       const searchInput = document.getElementById('search');
       const filterButtons = document.querySelectorAll('.filter-group .chip.btn');
       
-      // guard: search input may be absent
       if (searchInput) searchInput.addEventListener('input', filterProjects);
 
       filterButtons.forEach(btn => {
@@ -424,282 +254,6 @@
         });
       });
     });
-
-    function openProjectDetail(projectId, title) {
-      const projectTitles = {
-        'project1': '프로젝트1',
-        'project2': '네트워크 및 보안 실습'
-      };
-      document.getElementById('projectTitle').textContent = projectTitles[projectId] || title;
-      document.getElementById('projectDetail').classList.add('show');
-      document.getElementById('projectDetail').setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      // default: show network for project2, nothing for project1
-      if (projectId === 'project2') {
-        showCategory('network');
-      } else {
-        // hide content for project1
-        document.getElementById('categoryContent').style.display = 'none';
-        document.getElementById('categoryTitle').textContent = '카테고리 선택';
-        document.getElementById('categoryDetails').innerHTML = '<p>이 프로젝트에는 추가된 이미지가 없습니다.</p>';
-      }
-    }
-
-    // 전역으로 닫기 함수 등록 (HTML onclick에서 호출 가능)
-    window.closeProjectDetail = function() {
-      document.getElementById('projectDetail').classList.remove('show');
-      document.getElementById('projectDetail').setAttribute('aria-hidden','true');
-      document.body.style.overflow = 'auto';
-      document.getElementById('categoryContent').style.display = 'none';
-      setTimeout(() => {
-        const projSection = document.getElementById('projects');
-        if (projSection) projSection.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    }
-
-    // 닫기 보조: 모달 외부(overlay) 클릭 시 닫기, ESC 키로도 닫기
-    document.addEventListener('click', function(e) {
-      const pd = document.getElementById('projectDetail');
-      if (!pd) return;
-      if (e.target === pd) {
-        window.closeProjectDetail();
-      }
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' || e.key === 'Esc') {
-        const pd = document.getElementById('projectDetail');
-        if (pd && pd.classList.contains('show')) {
-          window.closeProjectDetail();
-        }
-      }
-    });
-
-    // 카테고리별 이미지 매핑 및 표시
-    function showCategory(category) {
-      const categoryContent = document.getElementById('categoryContent');
-      const categoryTitle = document.getElementById('categoryTitle');
-      const categoryDetails = document.getElementById('categoryDetails');
-
-      // 이미지와 설명을 함께 표시하는 갤러리 함수
-      const gallery = (images) => {
-        if (!images || images.length === 0) return '<p>등록된 이미지가 없습니다.</p>';
-        return `<div class="gallery">` + 
-          images.map(item => `
-            <div class="gallery-item">
-              <img src="pj2/${item.file}" alt="${item.alt}" title="${item.description}">
-              <div class="image-caption">${item.description}</div>
-            </div>
-          `).join('') + 
-          `</div>`;
-      };
-
-      const categories = {
-        network: {
-          title: '네트워크 구성 및 구축',
-          content: `
-            <h3>네트워크 인프라 설계 및 구축</h3>
-            <p>VLAN 설정, 라우터 간 통신, 파일 서버(NFS/SMB) 구축, SSH/FTP 서비스 설정 등 네트워크 인프라 전반의 구축과정을 담은 스크린샷들입니다.</p>
-            ${gallery([
-              {
-                file: 'vlan 설정.PNG',
-                alt: 'VLAN 설정 화면',
-                description: 'VLAN 10, 20, 30 구성 및 설정 완료'
-              },
-              {
-                file: 'vlan 10,20,30설정완료후 10에서 20,30통신.PNG',
-                alt: 'VLAN 간 통신 테스트',
-                description: 'VLAN 10에서 20, 30번 VLAN으로 통신 테스트 성공'
-              },
-              {
-                file: 'r2 r4 로ssh 접속가능.PNG',
-                alt: 'SSH 접속 성공',
-                description: 'R2에서 R4로 SSH 원격 접속 가능 확인'
-              },
-              {
-                file: 'r2 에서 R3 ssh정책 주기전.PNG',
-                alt: 'SSH 정책 설정 전',
-                description: 'R2에서 R3 SSH 보안 정책 적용 전 상태'
-              },
-              {
-                file: 'nfs 구축.PNG',
-                alt: 'NFS 서버 구축',
-                description: 'NFS 파일 서버 구축 및 설정 완료'
-              },
-              {
-                file: 'smbshare 서버 구축 및 활성화.PNG',
-                alt: 'SMB 서버 구축',
-                description: 'SMB Share 서버 구축 및 서비스 활성화'
-              },
-              {
-                file: '인사이드에서 텔넷.PNG',
-                alt: '텔넷 접속',
-                description: '내부 네트워크에서 텔넷 접속 테스트'
-              },
-              {
-                file: 'ftp 서버 구축 파일질라 cmd통신 성공.PNG',
-                alt: 'FTP 서버 구축',
-                description: 'FTP 서버 구축 및 FileZilla, CMD 통신 테스트 성공'
-              }
-            ])}
-          `
-        },
-        security: {
-          title: '보안솔루션 & 취약점 실습',
-          content: `
-            <h3>보안 취약점 분석 및 대응</h3>
-            <p>BOF(Buffer Overflow) 공격, CTF 문제 해결, 권한 상승, 접근 제어, 패스워드 정책 등 보안 관련 실습과 구축 과정을 담은 스크린샷들입니다.</p>
-            ${gallery([
-              {
-                file: 'bof 발생시키기.PNG',
-                alt: 'Buffer Overflow 실습',
-                description: 'BOF(Buffer Overflow) 취약점 발생 시키기 실습'
-              },
-              {
-                file: 'ctf userflag.PNG',
-                alt: 'CTF User Flag',
-                description: 'CTF 해킹 대회 - User Flag 획득 성공'
-              },
-              {
-                file: 'venus root플래그.PNG',
-                alt: 'Venus Root Flag',
-                description: 'Venus 시스템 - Root 권한 플래그 획득'
-              },
-              {
-                file: 'uid bit설정 권한상승.PNG',
-                alt: 'UID Bit 권한 상승',
-                description: 'UID Bit 설정을 통한 권한 상승 실습'
-              },
-              {
-                file: '스티키 비트 설정.PNG',
-                alt: '스티키 비트 설정',
-                description: '스티키 비트(Sticky Bit) 파일 권한 설정'
-              },
-              {
-                file: 'ossec 연결 가능.PNG',
-                alt: 'OSSEC 연결',
-                description: 'OSSEC HIDS 연결 및 모니터링 활성화'
-              },
-              {
-                file: 'ftp접속 불가능.PNG',
-                alt: 'FTP 접속 차단',
-                description: '보안 정책에 의한 FTP 접속 차단 확인'
-              },
-              {
-                file: 'http 접속가능.PNG',
-                alt: 'HTTP 접속 허용',
-                description: 'HTTP 프로토콜 접속 허용 상태 확인'
-              },
-              {
-                file: 'https접속가능.PNG',
-                alt: 'HTTPS 접속 허용',
-                description: 'HTTPS 보안 접속 허용 상태 확인'
-              },
-              {
-                file: '비밀번호 90일.PNG',
-                alt: '패스워드 정책 90일',
-                description: '패스워드 만료 기간 90일 정책 설정'
-              },
-              {
-                file: '비밀번호 변경.PNG',
-                alt: '패스워드 변경',
-                description: '사용자 패스워드 변경 실행'
-              }
-            ])}
-          `
-        },
-        monitoring: {
-          title: '모니터링 & 성능 관리',
-          content: `
-            <h3>시스템 모니터링 및 성능 분석</h3>
-            <p>PMM(Percona Monitoring and Management), Zabbix 등을 활용한 시스템 모니터링 구축 및 데이터베이스 성능 분석 과정을 담은 스크린샷들입니다.</p>
-            ${gallery([
-              {
-                file: 'pmm client와 R3 통신가능.PNG',
-                alt: 'PMM 클라이언트 통신',
-                description: 'PMM 클라이언트와 R3 라우터 간 통신 연결 확인'
-              },
-              {
-                file: 'pmm 서버 구축.PNG',
-                alt: 'PMM 서버 구축',
-                description: 'Percona Monitoring Management 서버 구축 완료'
-              },
-              {
-                file: 'PMM 클라이언트 db확인.PNG',
-                alt: 'PMM DB 모니터링',
-                description: 'PMM 클라이언트를 통한 데이터베이스 상태 모니터링'
-              },
-              {
-                file: 'zabbix 활성화.PNG',
-                alt: 'Zabbix 모니터링 활성화',
-                description: 'Zabbix 모니터링 시스템 활성화 및 에이전트 연결'
-              },
-              {
-                file: 'frontend skill조회.PNG',
-                alt: '프론트엔드 스킬 조회',
-                description: '모니터링 대시보드에서 기술 스택 정보 조회'
-              }
-            ])}
-          `
-        },
-        log: {
-          title: '로그 분석 및 관리',
-          content: `
-            <h3>시스템 로그 분석 및 보안 이벤트 추적</h3>
-            <p>시스템 로그 분석 도구 구축 및 로그인 기록(wtmp, btmp) 분석을 통한 보안 이벤트 추적 과정을 담은 스크린샷들입니다.</p>
-            ${gallery([
-              {
-                file: 'log analyzer.PNG',
-                alt: '로그 분석기',
-                description: '시스템 로그 분석 도구를 통한 로그 파일 분석'
-              },
-              {
-                file: 'wtmp.btmp 위치확인.PNG',
-                alt: 'wtmp/btmp 로그 위치',
-                description: 'wtmp, btmp 로그인 기록 파일 위치 확인 및 분석'
-              }
-            ])}
-          `
-        },
-        db: {
-          title: '데이터베이스 관리',
-          content: `
-            <h3>MariaDB 데이터베이스 구축 및 권한 관리</h3>
-            <p>MariaDB 데이터베이스 생성, 사용자 계정 관리, 권한 설정 등 데이터베이스 관리 전반의 과정을 담은 스크린샷들입니다.</p>
-            ${gallery([
-              {
-                file: 'DB dev생성.PNG',
-                alt: 'Dev DB 생성',
-                description: '개발용 데이터베이스(dev) 생성'
-              },
-              {
-                file: 'DB skillcode생성.PNG',
-                alt: 'SkillCode DB 생성',
-                description: 'SkillCode 프로젝트용 데이터베이스 생성'
-              },
-              {
-                file: 'DB 생성.PNG',
-                alt: '데이터베이스 생성',
-                description: 'MariaDB 새 데이터베이스 생성 과정'
-              },
-              {
-                file: 'DB 유저 권한 주기.PNG',
-                alt: 'DB 사용자 권한 설정',
-                description: '데이터베이스 사용자 계정 권한 부여 설정'
-              }
-            ])}
-          `
-        }
-      };
-
-      const categoryData = categories[category];
-      if (categoryData) {
-        categoryTitle.textContent = categoryData.title;
-        categoryDetails.innerHTML = categoryData.content;
-        categoryContent.style.display = 'block';
-        categoryContent.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
 
     function filterProjects() {
       const searchTermEl = document.getElementById('search');
@@ -714,87 +268,33 @@
         const desc = (project.querySelector('p') ? project.querySelector('p').textContent.toLowerCase() : '');
         
         const matchesSearch = searchTerm === '' || tags.includes(searchTerm) || title.includes(searchTerm) || desc.includes(searchTerm);
+        const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
         
-        const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter) || (project.querySelector('.badge') && project.querySelector('.badge').textContent.toLowerCase().includes(activeFilter));
-        
-        if (matchesSearch && matchesFilter) {
-          project.style.display = 'block';
-        } else {
-          project.style.display = 'none';
-        }
+        project.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
       });
     }
 
     // Back to top button
     window.addEventListener('scroll', function() {
       const toTop = document.getElementById('toTop');
-      if (window.pageYOffset > 300) {
-        toTop.style.display = 'block';
-      } else {
-        toTop.style.display = 'none';
-      }
+      toTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
     });
 
-    // Smooth scrolling for navigation links
+    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
 
-    // Navbar transparency on scroll
+    // Navbar transparency
     window.addEventListener('scroll', function() {
       const nav = document.querySelector('.nav');
-      if (window.scrollY > 50) {
-        nav.classList.remove('transparent');
-      } else {
-        nav.classList.add('transparent');
-      }
-    });
-
-    // 이미지 클릭 시 확대 기능 (optional)
-    document.addEventListener('click', function(e) {
-      if (e.target.tagName === 'IMG' && e.target.closest('.gallery')) {
-        const img = e.target;
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0,0,0,0.9);
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        `;
-        
-        const enlargedImg = document.createElement('img');
-        enlargedImg.src = img.src;
-        enlargedImg.alt = img.alt;
-        enlargedImg.style.cssText = `
-          max-width: 90%;
-          max-height: 90%;
-          border-radius: 8px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        `;
-        
-        overlay.appendChild(enlargedImg);
-        document.body.appendChild(overlay);
-        
-        overlay.addEventListener('click', function() {
-          document.body.removeChild(overlay);
-        });
-      }
+      nav.classList.toggle('transparent', window.scrollY <= 50);
     });
   </script>
 </body>
