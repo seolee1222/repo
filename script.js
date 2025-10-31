@@ -242,7 +242,7 @@ const categoryData = {
     `,
     images: [
       { file: 'log analyzer.PNG', alt: '로그 분석기', description: '시스템 로그 분석 도구를 통한 로그 파일 분석' },
-      { file: 'wtmp.btmp 위치확인.PNG', alt: 'wtmp/btmp 로그 위치', description: 'wtmp, btmp 로그인 기록 파일 위치 확인 및 분석' }
+      { file: 'wtmp,btmp 위치확인.PNG', alt: 'wtmp/btmp 로그 위치', description: 'wtmp, btmp 로그인 기록 파일 위치 확인 및 분석' }
     ]
   },
   db: {
