@@ -1,0 +1,510 @@
+/* ==========================================
+   기본 리셋 & 변수 설정
+   ========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #222;
+  --secondary: #444;
+  --text: #1d1d1f;
+  --muted: #666;
+  --bg: #f7f7f8;
+  --card: #ffffff;
+  --line: #e6e6e6;
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ==========================================
+   레이아웃
+   ========================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================
+   헤더 & 히어로 섹션
+   ========================================== */
+
+.header {
+  background: #0f0f10;
+  color: #fff;
+  padding: 3.5rem 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.2px;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* ==========================================
+   버튼 스타일
+   ========================================== */
+
+.cta {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn.primary {
+  background: #222;
+  color: #fff;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: #333;
+  color: #fff;
+}
+
+.btn.ghost:hover {
+  border-color: #dcdcdc;
+  background: #1a1a1a;
+}
+
+.btn.submit {
+  background: #222;
+  color: #fff;
+}
+
+.btn.submit:hover {
+  background: #000;
+}
+
+/* ==========================================
+   네비게이션
+   ========================================== */
+
+.nav {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.nav.transparent {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: saturate(140%) blur(8px);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.brand {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.25rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: 0.25s;
+}
+
+.nav-links a:hover {
+  background: #222;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   메인 콘텐츠
+   ========================================== */
+
+main {
+  margin: 2rem 0;
+}
+
+section {
+  scroll-margin-top: 90px;
+  margin-bottom: 2rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.section-desc {
+  color: var(--muted);
+}
+
+/* ==========================================
+   카드 스타일
+   ========================================== */
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+
+.card .inner {
+  padding: 1.25rem;
+}
+
+/* ==========================================
+   소개(About) 섹션
+   ========================================== */
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 100%;
+  height: 280px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #d9d9d9, #cfcfcf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  font-weight: 800;
+}
+
+/* ==========================================
+   스킬 & 칩
+   ========================================== */
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+
+.chip {
+  background: #f0f0f0;
+  color: #222;
+  border: 1px solid #dcdcdc;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.chip.btn {
+  background: #f5f5f5;
+  border: 1px solid #dcdcdc;
+  color: #222;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.chip.btn.active,
+.chip.btn:hover {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+/* ==========================================
+   검색 & 필터 컨트롤
+   ========================================== */
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.search-box {
+  position: relative;
+  flex: 1 1 280px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 2px solid #e3e3e3;
+  border-radius: 999px;
+  outline: none;
+  transition: border-color 0.25s;
+  background: #fff;
+}
+
+.search-box input:focus {
+  border-color: #222;
+}
+
+.filter-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================
+   프로젝트 그리드
+   ========================================== */
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.project {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: 0.25s;
+  border: 1px solid var(--line);
+}
+
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.thumb {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  background: #222;
+}
+
+.project .inner {
+  padding: 1.1rem;
+}
+
+.meta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.badge {
+  margin-left: auto;
+  display: inline-block;
+  background: #eee;
+  color: #222;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  border: 1px solid #ddd;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.6rem;
+}
+
+.links a {
+  font-weight: 800;
+  text-decoration: none;
+  color: #222;
+}
+
+.links a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+img.project-img {
+  width: 100%;
+  margin-top: 0.6rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+/* ==========================================
+   연락처 섹션
+   ========================================== */
+
+.contact-card {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1rem;
+}
+
+form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid #e3e3e3;
+  border-radius: 12px;
+  outline: none;
+  transition: 0.25s;
+  font: inherit;
+  background: #fff;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #222;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ==========================================
+   푸터
+   ========================================== */
+
+.footer {
+  background: #0f0f10;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+/* ==========================================
+   맨 위로 버튼
+   ========================================== */
+
+#toTop {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: #222;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  font-weight: 700;
+  display: none;
+}
+
+#toTop:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   반응형 미디어 쿼리
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .about {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 2.1rem;
+  }
+  
+  .projects {
+    grid-template-columns: 1fr;
+  }
+}
