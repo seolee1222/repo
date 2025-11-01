@@ -76,3 +76,81 @@
   <script src="script.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>네트워크 및 보안 실습 | Lee Seok Hyun Portfolio</title>
+  
+  <!-- 공통 CSS 사용 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="nav-detail">
+        <h1 class="title">네트워크 및 보안 실습</h1>
+        <a href="main.html" class="btn ghost">← 돌아가기</a>
+      </div>
+      <p class="subtitle">세부 카테고리별 상세 내용 및 구축 스크린샷</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Category Navigation -->
+    <div class="category-nav">
+      <a href="#" class="category-item" data-category="network">
+        <div class="category-icon">🌐</div>
+        <div class="category-title">네트워크</div>
+        <div class="category-desc">라우팅, 스위칭, VLAN 구성</div>
+      </a>
+      <a href="#" class="category-item" data-category="security">
+        <div class="category-icon">🔒</div>
+        <div class="category-title">보안솔루션</div>
+        <div class="category-desc">방화벽, 접근제어, 취약점 실습</div>
+      </a>
+      <a href="#" class="category-item" data-category="monitoring">
+        <div class="category-icon">📊</div>
+        <div class="category-title">모니터링</div>
+        <div class="category-desc">Zabbix, PMM 등</div>
+      </a>
+      <a href="#" class="category-item" data-category="log">
+        <div class="category-icon">📝</div>
+        <div class="category-title">로그</div>
+        <div class="category-desc">로그 분석 관련</div>
+      </a>
+      <a href="#" class="category-item" data-category="db">
+        <div class="category-icon">🗄️</div>
+        <div class="category-title">DB</div>
+        <div class="category-desc">MariaDB 관련</div>
+      </a>
+    </div>
+
+    <!-- Category Content -->
+    <div id="categoryContent" class="card" style="display:none;">
+      <h2 id="categoryTitle">카테고리 선택</h2>
+      <div id="categoryDetails">
+        <p>위에서 카테고리를 선택하면 해당 분야의 상세 내용이 표시됩니다.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Lee Seok Hyun. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="modal">
+    <img id="modalImage" class="modal-img" alt="">
+  </div>
+
+  <!-- 공통 JavaScript 사용 -->
+  <script src="script.js"></script>
+</body>
+</html>
