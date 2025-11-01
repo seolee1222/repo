@@ -1,417 +1,711 @@
-// ==========================================
-// 프로젝트 상세 페이지 열기
-// ==========================================
+/* ==========================================
+   기본 리셋 & 변수 설정
+   ========================================== */
 
-function openProjectDetail(projectId) {
-  if (projectId === 'project2') {
-    // project2.html로 이동
-    window.open('project2.html', '_blank');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #222;
+  --secondary: #444;
+  --text: #1d1d1f;
+  --muted: #666;
+  --bg: #f7f7f8;
+  --card: #ffffff;
+  --line: #e6e6e6;
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ==========================================
+   레이아웃
+   ========================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================
+   헤더 & 히어로 섹션
+   ========================================== */
+
+.header {
+  background: #0f0f10;
+  color: #fff;
+  padding: 3.5rem 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.2px;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* ==========================================
+   버튼 스타일
+   ========================================== */
+
+.cta {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn.primary {
+  background: #222;
+  color: #fff;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: #333;
+  color: #fff;
+}
+
+.btn.ghost:hover {
+  border-color: #dcdcdc;
+  background: #1a1a1a;
+}
+
+.btn.submit {
+  background: #222;
+  color: #fff;
+}
+
+.btn.submit:hover {
+  background: #000;
+}
+
+/* ==========================================
+   네비게이션
+   ========================================== */
+
+.nav {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.nav.transparent {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: saturate(140%) blur(8px);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.brand {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.25rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: 0.25s;
+}
+
+.nav-links a:hover {
+  background: #222;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   메인 콘텐츠
+   ========================================== */
+
+main {
+  margin: 2rem 0;
+}
+
+section {
+  scroll-margin-top: 90px;
+  margin-bottom: 2rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.section-desc {
+  color: var(--muted);
+}
+
+/* ==========================================
+   카드 스타일
+   ========================================== */
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+
+.card .inner {
+  padding: 1.25rem;
+}
+
+/* ==========================================
+   소개(About) 섹션
+   ========================================== */
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 100%;
+  height: 280px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #d9d9d9, #cfcfcf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  font-weight: 800;
+}
+
+/* ==========================================
+   스킬 & 칩
+   ========================================== */
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+
+.chip {
+  background: #f0f0f0;
+  color: #222;
+  border: 1px solid #dcdcdc;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.chip.btn {
+  background: #f5f5f5;
+  border: 1px solid #dcdcdc;
+  color: #222;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.chip.btn.active,
+.chip.btn:hover {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+/* ==========================================
+   검색 & 필터 컨트롤
+   ========================================== */
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.search-box {
+  position: relative;
+  flex: 1 1 280px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 2px solid #e3e3e3;
+  border-radius: 999px;
+  outline: none;
+  transition: border-color 0.25s;
+  background: #fff;
+}
+
+.search-box input:focus {
+  border-color: #222;
+}
+
+.filter-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================
+   프로젝트 그리드
+   ========================================== */
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.project {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: 0.25s;
+  border: 1px solid var(--line);
+}
+
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.thumb {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  background: #222;
+}
+
+.project .inner {
+  padding: 1.1rem;
+}
+
+.meta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.badge {
+  margin-left: auto;
+  display: inline-block;
+  background: #eee;
+  color: #222;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  border: 1px solid #ddd;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.6rem;
+}
+
+.links a {
+  font-weight: 800;
+  text-decoration: none;
+  color: #222;
+}
+
+.links a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+img.project-img {
+  width: 100%;
+  margin-top: 0.6rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+/* ==========================================
+   연락처 섹션
+   ========================================== */
+
+.contact-card {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1rem;
+}
+
+form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid #e3e3e3;
+  border-radius: 12px;
+  outline: none;
+  transition: 0.25s;
+  font: inherit;
+  background: #fff;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #222;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ==========================================
+   푸터
+   ========================================== */
+
+.footer {
+  background: #0f0f10;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+/* ==========================================
+   맨 위로 버튼
+   ========================================== */
+
+#toTop {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: #222;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  font-weight: 700;
+  display: none;
+}
+
+#toTop:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   반응형 미디어 쿼리
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .about {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-card {
+    grid-template-columns: 1fr;
   }
 }
 
-// ==========================================
-// 검색 & 필터링 기능
-// ==========================================
-
-function filterProjects() {
-  const searchTermEl = document.getElementById('search');
-  const searchTerm = searchTermEl ? searchTermEl.value.toLowerCase() : '';
-  const activeFilterBtn = document.querySelector('.filter-group .chip.btn.active');
-  const activeFilter = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
-  const projects = document.querySelectorAll('.project');
+@media (max-width: 640px) {
+  .title {
+    font-size: 2.1rem;
+  }
   
-  projects.forEach(project => {
-    const tags = (project.dataset.tags || '').toLowerCase();
-    const title = (project.querySelector('h3') ? project.querySelector('h3').textContent.toLowerCase() : '');
-    const desc = (project.querySelector('p') ? project.querySelector('p').textContent.toLowerCase() : '');
-    
-    const matchesSearch = searchTerm === '' || tags.includes(searchTerm) || title.includes(searchTerm) || desc.includes(searchTerm);
-    const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
-    
-    project.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
-  });
-}
-
-// ==========================================
-// 맨 위로 버튼 표시/숨김
-// ==========================================
-
-function toggleBackToTop() {
-  const toTop = document.getElementById('toTop');
-  if (toTop) {
-    toTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+  .projects {
+    grid-template-columns: 1fr;
   }
 }
 
-// ==========================================
-// 네비게이션 투명도 조절
-// ==========================================
+/* ==========================================
+   프로젝트 상세 페이지 추가 스타일
+   ========================================== */
 
-function handleNavTransparency() {
-  const nav = document.querySelector('.nav');
-  if (nav) {
-    nav.classList.toggle('transparent', window.scrollY <= 50);
+/* 네비게이션 상세 */
+.nav-detail {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* 카테고리 네비게이션 */
+.category-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.category-item {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  display: block;
+}
+
+.category-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.category-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.category-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.category-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  display: block;
+}
+
+/* 갤러리 (이미지 그리드) */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  transform: scale(1.02);
+}
+
+.image-caption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* 이미지 모달 (확대 보기) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 반응형 추가 */
+@media (max-width: 640px) {
+  .category-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .gallery {
+    grid-template-columns: 1fr;
   }
 }
 
-// ==========================================
-// 부드러운 스크롤 초기화
-// ==========================================
 
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
+
+/* === Project2/3 shared (append-only) === */
+:root{
+  --pj2-bg:#f7f7f8; --pj2-card:#fff; --pj2-text:#111827; --pj2-muted:#6b7280; --pj2-line:#e5e7eb;
+  --pj2-shadow:0 4px 20px rgba(0,0,0,.10); --pj2-radius:14px; --pj2-primary:#1d3557;
 }
-
-// ==========================================
-// 검색 & 필터 이벤트 리스너 초기화
-// ==========================================
-
-function initSearchAndFilters() {
-  const searchInput = document.getElementById('search');
-  const filterButtons = document.querySelectorAll('.filter-group .chip.btn');
-  
-  // 검색 입력 이벤트
-  if (searchInput) {
-    searchInput.addEventListener('input', filterProjects);
-  }
-
-  // 필터 버튼 클릭 이벤트
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      filterProjects();
-    });
-  });
+.pj2-header{position:relative; padding:32px 12px 10px; text-align:center}
+.pj2-header-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.pj2-back-btn{
+  position:relative; display:inline-flex; align-items:center; gap:8px;
+  padding:10px 14px; border-radius:12px; background:#fff; color:#0f172a;
+  border:1px solid var(--pj2-line); box-shadow:0 6px 18px rgba(0,0,0,.08);
+  cursor:pointer; transition:transform .1s ease;
 }
-
-// ==========================================
-// 프로젝트 클릭 이벤트 초기화
-// ==========================================
-
-function initProjectClicks() {
-  const projects = document.querySelectorAll('.project');
-  projects.forEach(project => {
-    project.addEventListener('click', function() {
-      const projectId = this.dataset.project;
-      if (projectId) {
-        openProjectDetail(projectId);
-      }
-    });
-  });
+.pj2-home-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 14px; border-radius:12px; background:#0ea5e9; color:#fff; text-decoration:none;
+  border:1px solid rgba(0,0,0,.05); box-shadow:0 6px 18px rgba(0,0,0,.08);
+  font-weight:700;
 }
+.pj2-topology{display:flex; justify-content:center; padding:10px 12px 24px; background:var(--pj2-bg)}
+.pj2-topology img{ width:95%; max-width:1400px; border-radius:var(--pj2-radius); box-shadow:var(--pj2-shadow) }
 
-// ==========================================
-// 연락 폼 제출 처리
-// ==========================================
-
-function initContactForm() {
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value;
-      window.location.href = `mailto:you@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-    });
-  }
+/* 2-column cover grid */
+.pj2-container{
+  max-width:1100px; margin:0 auto; padding:0 12px 80px; background:var(--pj2-bg); color:var(--pj2-text);
+  display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:18px; align-items:start;
 }
-
-// ==========================================
-// 맨 위로 버튼 클릭 처리
-// ==========================================
-
-function initBackToTopButton() {
-  const toTopBtn = document.getElementById('toTop');
-  if (toTopBtn) {
-    toTopBtn.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+.pj2-section{
+  background:var(--pj2-card); border:1px solid var(--pj2-line); border-radius:var(--pj2-radius);
+  box-shadow:var(--pj2-shadow); padding:14px; margin:0;
 }
+.pj2-section h2{ margin:0 0 6px; font-size:18px; color:#14324d }
+.pj2-section .pj2-hint{ margin:0 0 12px; font-size:12px; color:#55606d }
+.pj2-cover{ display:block; width:100%; border:0; background:transparent; padding:0; cursor:pointer; text-align:left;
+  border-radius:12px; overflow:hidden; position:relative; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+.pj2-cover-grid{ display:grid; grid-template-rows:1fr auto }
+.pj2-cover-img{ width:100%; height:auto; object-fit:cover; aspect-ratio:16/9 }
+.pj2-cover-bar{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; background:#fff; border-top:1px solid #eef1f5; }
+.pj2-cover-title{ font-weight:700; color:#0f172a; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.pj2-cover-cta{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#e6f6fd; color:#0b76a6; font-weight:700; font-size:13px; border:1px solid #ccebf7; }
+.pj2-chev{ width:16px; height:16px; transition:transform .2s ease }
+.pj2-panel{ overflow:hidden; max-height:0; transition:max-height .3s ease; will-change:max-height; border-top:1px dashed #e8edf3; margin-top:12px; }
+.pj2-panel-inner{ padding-top:16px; display:flex; flex-direction:column; gap:16px }
+.pj2-card{ background:#fff; border:1px solid #eef1f5; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.06); padding:12px; }
+.pj2-thumb{ width:100%; height:auto; object-fit:contain; border-radius:10px; background:#fff; cursor:zoom-in }
+.pj2-caption{ margin-top:10px; font-weight:700; font-size:14px; color:#111827 }
+.pj2-desc{ margin-top:6px; font-size:12.5px; color:var(--pj2-muted); line-height:1.6 }
+.pj2-section[data-open="true"] .pj2-chev{ transform:rotate(180deg) }
+.pj2-section[data-open="true"] .pj2-cover-cta{ background:#d1f0fb; color:#095f85; border-color:#b9e7f8 }
+@media (max-width:900px){ .pj2-container{ grid-template-columns:1fr; } }
 
-// ==========================================
-// 스크롤 이벤트 통합 처리
-// ==========================================
-
-function handleScroll() {
-  toggleBackToTop();
-  handleNavTransparency();
-}
-
-// ==========================================
-// 페이지 로드 시 초기화
-// ==========================================
-
-document.addEventListener('DOMContentLoaded', function() {
-  // 검색 & 필터 초기화
-  initSearchAndFilters();
-  
-  // 프로젝트 클릭 이벤트
-  initProjectClicks();
-  
-  // 부드러운 스크롤
-  initSmoothScroll();
-  
-  // 연락 폼
-  initContactForm();
-  
-  // 맨 위로 버튼
-  initBackToTopButton();
-  
-  // 스크롤 이벤트 리스너
-  window.addEventListener('scroll', handleScroll);
-  
-  // 초기 상태 설정
-  handleScroll();
-  
-  // 프로젝트 상세 페이지 전용 초기화
-  initProjectDetailPage();
-});
-
-// ==========================================
-// 프로젝트 상세 페이지 전용 기능
-// ==========================================
-
-// 카테고리 데이터
-const categoryData = {
-  network: {
-    title: '네트워크 구성 및 구축',
-    content: `
-      <h3>네트워크 인프라 설계 및 구축</h3>
-      <p>VLAN 설정, 라우터 간 통신, 파일 서버(NFS/SMB) 구축, SSH/FTP 서비스 설정 등 네트워크 인프라 전반의 구축과정을 담은 스크린샷들입니다.</p>
-    `,
-    images: [
-      { file: 'vlan 설정.PNG', alt: 'VLAN 설정 화면', description: 'VLAN 10, 20, 30 구성 및 설정 완료' },
-      { file: 'vlan 10,20,30설정완료후 10에서 20,30통신.PNG', alt: 'VLAN 간 통신 테스트', description: 'VLAN 10에서 20, 30번 VLAN으로 통신 테스트 성공' },
-      { file: 'r2 r4 로ssh 접속가능.PNG', alt: 'SSH 접속 성공', description: 'R2에서 R4로 SSH 원격 접속 가능 확인' },
-      { file: 'r2 에서 R3 ssh정책 주기전.PNG', alt: 'SSH 정책 설정 전', description: 'R2에서 R3 SSH 보안 정책 적용 전 상태' },
-      { file: 'nfs 구축.PNG', alt: 'NFS 서버 구축', description: 'NFS 파일 서버 구축 및 설정 완료' },
-      { file: 'smbshare 서버 구축 및 활성화.PNG', alt: 'SMB 서버 구축', description: 'SMB Share 서버 구축 및 서비스 활성화' },
-      { file: '인사이드에서 텔넷.PNG', alt: '텔넷 접속', description: '내부 네트워크에서 텔넷 접속 테스트' },
-      { file: 'ftp 서버 구축 파일질라 cmd통신 성공.PNG', alt: 'FTP 서버 구축', description: 'FTP 서버 구축 및 FileZilla, CMD 통신 테스트 성공' }
-    ]
-  },
-  security: {
-    title: '보안솔루션 & 취약점 실습',
-    content: `
-      <h3>보안 취약점 분석 및 대응</h3>
-      <p>BOF(Buffer Overflow) 공격, CTF 문제 해결, 권한 상승, 접근 제어, 패스워드 정책 등 보안 관련 실습 과정입니다.</p>
-    `,
-    images: [
-      { file: 'bof 발생시키기.PNG', alt: 'Buffer Overflow 실습', description: 'BOF(Buffer Overflow) 취약점 발생 시키기 실습' },
-      { file: 'ctf userflag.PNG', alt: 'CTF User Flag', description: 'CTF 해킹 대회 - User Flag 획득 성공' },
-      { file: 'venus root플래그.PNG', alt: 'Venus Root Flag', description: 'Venus 시스템 - Root 권한 플래그 획득' },
-      { file: 'uid bit설정 권한상승.PNG', alt: 'UID Bit 권한 상승', description: 'UID Bit 설정을 통한 권한 상승 실습' },
-      { file: '스티키 비트 설정.PNG', alt: '스티키 비트 설정', description: '스티키 비트(Sticky Bit) 파일 권한 설정' },
-      { file: 'ossec 연결 가능.PNG', alt: 'OSSEC 연결', description: 'OSSEC HIDS 연결 및 모니터링 활성화' },
-      { file: 'ftp접속 불가능.PNG', alt: 'FTP 접속 차단', description: '보안 정책에 의한 FTP 접속 차단 확인' },
-      { file: 'http 접속가능.PNG', alt: 'HTTP 접속 허용', description: 'HTTP 프로토콜 접속 허용 상태 확인' },
-      { file: 'https접속가능.PNG', alt: 'HTTPS 접속 허용', description: 'HTTPS 보안 접속 허용 상태 확인' },
-      { file: '비밀번호 90일.PNG', alt: '패스워드 정책 90일', description: '패스워드 만료 기간 90일 정책 설정' },
-      { file: '비밀번호 변경.PNG', alt: '패스워드 변경', description: '사용자 패스워드 변경 실행' }
-    ]
-  },
-  monitoring: {
-    title: '모니터링 & 성능 관리',
-    content: `
-      <h3>시스템 모니터링 및 성능 분석</h3>
-      <p>PMM, Zabbix 등을 활용한 시스템 모니터링 구축 과정입니다.</p>
-    `,
-    images: [
-      { file: 'pmm client와 R3 통신가능.PNG', alt: 'PMM 클라이언트 통신', description: 'PMM 클라이언트와 R3 라우터 간 통신 연결 확인' },
-      { file: 'pmm 서버 구축.PNG', alt: 'PMM 서버 구축', description: 'Percona Monitoring Management 서버 구축 완료' },
-      { file: 'PMM 클라이언트 db확인.PNG', alt: 'PMM DB 모니터링', description: 'PMM 클라이언트를 통한 데이터베이스 상태 모니터링' },
-      { file: 'zabbix 활성화.PNG', alt: 'Zabbix 모니터링 활성화', description: 'Zabbix 모니터링 시스템 활성화 및 에이전트 연결' },
-      { file: 'frontend skill조회.PNG', alt: '프론트엔드 스킬 조회', description: '모니터링 대시보드에서 기술 스택 정보 조회' }
-    ]
-  },
-  log: {
-    title: '로그 분석 및 관리',
-    content: `
-      <h3>시스템 로그 분석 및 보안 이벤트 추적</h3>
-      <p>로그 분석 도구 구축 및 로그인 기록 분석입니다.</p>
-    `,
-    images: [
-      { file: 'log analyzer.PNG', alt: '로그 분석기', description: '시스템 로그 분석 도구를 통한 로그 파일 분석' },
-      { file: 'wtmp,btmp 위치확인.PNG', alt: 'wtmp/btmp 로그 위치', description: 'wtmp, btmp 로그인 기록 파일 위치 확인 및 분석' }
-    ]
-  },
-  db: {
-    title: '데이터베이스 관리',
-    content: `
-      <h3>MariaDB 데이터베이스 구축 및 권한 관리</h3>
-      <p>MariaDB 생성, 사용자 계정 관리, 권한 설정 등입니다.</p>
-    `,
-    images: [
-      { file: 'DB dev생성.PNG', alt: 'Dev DB 생성', description: '개발용 데이터베이스(dev) 생성' },
-      { file: 'DB skillcode생성.PNG', alt: 'SkillCode DB 생성', description: 'SkillCode 프로젝트용 데이터베이스 생성' },
-      { file: 'DB 생성.PNG', alt: '데이터베이스 생성', description: 'MariaDB 새 데이터베이스 생성 과정' },
-      { file: 'DB 유저 권한 주기.PNG', alt: 'DB 사용자 권한 설정', description: '데이터베이스 사용자 계정 권한 부여 설정' }
-    ]
-  }
-};
-
-function createGalleryHTML(images) {
-  if (!images || images.length === 0) {
-    return '<p>등록된 이미지가 없습니다.</p>';
-  }
-  
-  const galleryItems = images.map(item => `
-    <div class="gallery-item">
-      <img 
-        src="pj2/${item.file}" 
-        alt="${item.alt}" 
-        title="${item.description}"
-        data-src="pj2/${item.file}"
-      >
-      <div class="image-caption">${item.description}</div>
-    </div>
-  `).join('');
-  
-  return `<div class="gallery">${galleryItems}</div>`;
-}
-
-function showCategory(category) {
-  const categoryContent = document.getElementById('categoryContent');
-  const categoryTitle = document.getElementById('categoryTitle');
-  const categoryDetails = document.getElementById('categoryDetails');
-  
-  if (!categoryContent || !categoryTitle || !categoryDetails) return;
-  
-  const data = categoryData[category];
-  
-  if (data) {
-    categoryTitle.textContent = data.title;
-    categoryDetails.innerHTML = data.content + createGalleryHTML(data.images);
-    categoryContent.style.display = 'block';
-    categoryContent.scrollIntoView({ behavior: 'smooth' });
-    
-    // 이미지 클릭 이벤트 재등록
-    attachImageClickEvents();
-  }
-}
-
-function attachImageClickEvents() {
-  const images = document.querySelectorAll('.gallery img');
-  images.forEach(img => {
-    img.addEventListener('click', function() {
-      openImageModal(this.getAttribute('data-src'));
-    });
-  });
-}
-
-function openImageModal(src) {
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('modalImage');
-  if (modal && modalImg) {
-    modalImg.src = src;
-    modal.classList.add('active');
-  }
-}
-
-function closeImageModal() {
-  const modal = document.getElementById('imageModal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-}
-
-function initProjectDetailPage() {
-  // 카테고리 네비게이션이 있으면 프로젝트 상세 페이지
-  const categoryItems = document.querySelectorAll('.category-item');
-  if (categoryItems.length === 0) return;
-  
-  categoryItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      const category = this.getAttribute('data-category');
-      if (category) {
-        showCategory(category);
-      }
-    });
-  });
-  
-  // 모달 클릭 시 닫기
-  const modal = document.getElementById('imageModal');
-  if (modal) {
-    modal.addEventListener('click', closeImageModal);
-  }
-  
-  // ESC 키로 모달 닫기
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeImageModal();
-    }
-  });
-}
-
-/* === Project 3 renderer (append-only) === */
-(function(){
-  const PJ3_SECTIONS = [{"title": "1. GNS3에서 설정", "hint": "GNS3 기본 구성과 통신 검증", "items": [{"file": "vlansetting.PNG", "alt": "vlansetting", "desc": ""}, {"file": "telnet 허용.png", "alt": "telnet허용", "desc": ""}, {"file": "dns에서 인사이드로 핑.png", "alt": "dns에서 인사이드로 핑", "desc": ""}]}, {"title": "2. OWASP JUICE SHOP", "hint": "별점 과제 진행 기록", "items": [{"file": "2star.PNG", "alt": "2star", "desc": ""}, {"file": "3star.PNG", "alt": "3star", "desc": ""}, {"file": "4star.PNG", "alt": "4star", "desc": ""}]}, {"title": "3. 서버 구축", "hint": "로그/모니터링/보안 서버 구성", "items": [{"file": "goaccess.PNG", "alt": "goaccess", "desc": ""}, {"file": "goaccessweb.PNG", "alt": "goaccessweb", "desc": ""}, {"file": "NMS-Zabbix.PNG", "alt": "NMS-Zabbix", "desc": ""}, {"file": "ossec구축.PNG", "alt": "ossec구축", "desc": ""}, {"file": "PMM서버구축.PNG", "alt": "PMM서버구축", "desc": ""}, {"file": "suricata설치및 동작.PNG", "alt": "suricata 설치및동작", "desc": ""}, {"file": "WAF구축.PNG", "alt": "WAF구축", "desc": ""}, {"file": "wazuh.PNG", "alt": "wazuh", "desc": ""}, {"file": "와즈 설치.PNG", "alt": "와즈설치", "desc": ""}, {"file": "와즈 설치완.PNG", "alt": "와즈설치완", "desc": ""}]}];
-  const el = (t,a={},h="")=>{const n=document.createElement(t);for(const[k,v]of Object.entries(a)){if(k==="class")n.className=v;else if(k.startsWith("on")&&typeof v==="function")n.addEventListener(k.slice(2),v);else if(v!==undefined&&v!==null)n.setAttribute(k,v);}if(h)n.innerHTML=h;return n;};
-  function renderProject3(rootId="pj3-content"){
-    const root=document.getElementById(rootId); if(!root) return; root.innerHTML="";
-    (window.PJ3_SECTIONS_OVERRIDE||PJ3_SECTIONS).forEach((sec, idx)=>{
-      const section=el("section",{class:"pj2-section","data-open":"false"});
-      section.append(el("h2",{},sec.title), el("p",{class:"pj2-hint"},sec.hint||""));
-      const [coverItem,...rest]=sec.items;
-      const cover=el("button",{class:"pj2-cover","aria-expanded":"false","aria-controls":`pj3-panel-${idx}`,id:`pj3-cover-${idx}`});
-      const grid=el("div",{class:"pj2-cover-grid"});
-      const coverImg=el("img",{class:"pj2-cover-img",src:`pj3/${coverItem.file}`,alt:coverItem.alt||""});
-      const bar=el("div",{class:"pj2-cover-bar"});
-      const title=el("div",{class:"pj2-cover-title"},coverItem.alt||coverItem.file);
-      const cta=el("div",{class:"pj2-cover-cta"},"열어서 보기");
-      const chev=el("span",{class:"pj2-chev","aria-hidden":"true"},"▼");
-      bar.append(title, cta); grid.append(coverImg, bar); cover.append(grid, chev); section.append(cover);
-      const panel=el("div",{class:"pj2-panel",id:`pj3-panel-${idx}`,role:"region","aria-labelledby":`pj3-cover-${idx}`});
-      const inner=el("div",{class:"pj2-panel-inner"});
-      rest.forEach(it=>{ const card=el("article",{class:"pj2-card"});
-        const img=el("img",{class:"pj2-thumb",src:`pj3/${it.file}`,alt:it.alt||""});
-        const cap=el("div",{class:"pj2-caption"}, it.alt||it.file);
-        const desc=el("div",{class:"pj2-desc"}, it.desc||"");
-        card.append(img,cap,desc); inner.append(card); });
-      panel.append(inner); section.append(panel); root.append(section);
-      cover.addEventListener("click",()=>{ const open=section.getAttribute("data-open")==="true";
-        section.setAttribute("data-open", String(!open)); cover.setAttribute("aria-expanded", String(!open));
-        panel.style.maxHeight = open ? "0" : (inner.scrollHeight+"px"); cta.textContent = open?"열어서 보기":"접기"; });
-      panel.style.maxHeight="0";
-    });
-  }
-  document.addEventListener("DOMContentLoaded", ()=>{ if(document.body.dataset.page==="project3") renderProject3("pj3-content"); });
-  // Lightbox delegation
-  if(!window.__PJ3_LB__){ window.__PJ3_LB__=true;
-    function ensureLB(){ let lb=document.getElementById("pj2-lightbox"); if(lb) return lb;
-      lb=document.createElement("div"); lb.className="pj2-lightbox"; lb.id="pj2-lightbox"; lb.setAttribute("aria-hidden","true");
-      lb.innerHTML=`<div class="pj2-lightbox-scrim" data-pj2-close></div>
-        <div class="pj2-lightbox-dialog" role="dialog" aria-modal="true"><div class="pj2-lightbox-media">
-        <img class="pj2-lightbox-img" alt=""/></div><aside class="pj2-lightbox-meta"><div>
-        <div class="pj2-lightbox-title" id="pj2-lightbox-title"></div>
-        <div class="pj2-lightbox-desc" id="pj2-lightbox-desc"></div></div>
-        <div class="pj2-lightbox-actions"><small style="opacity:.75">이미지 클릭·ESC로 닫기</small>
-        <button class="pj2-lightbox-close" type="button" data-pj2-close>닫기</button></div></aside></div>`;
-      document.body.appendChild(lb); return lb; }
-    function openLB(src,alt,title,desc){ const lb=ensureLB(); lb.querySelector(".pj2-lightbox-img").src=src;
-      lb.querySelector(".pj2-lightbox-img").alt=alt||title||""; lb.querySelector("#pj2-lightbox-title").textContent=title||alt||"";
-      lb.querySelector("#pj2-lightbox-desc").textContent=desc||""; lb.setAttribute("aria-hidden","false"); }
-    function closeLB(){ const lb=document.getElementById("pj2-lightbox"); if(lb) lb.setAttribute("aria-hidden","true"); }
-    document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") closeLB(); });
-    document.addEventListener("click",(e)=>{ const t=e.target; if(t&&t.matches&&t.matches(".pj2-lightbox-scrim,[data-pj2-close],.pj2-lightbox-img")) closeLB(); });
-    document.addEventListener("click",(e)=>{ const c=document.getElementById("pj3-content"); if(!c||!c.contains(e.target)) return;
-      const th=e.target.closest(".pj2-thumb"); if(th){ const card=th.closest(".pj2-card");
-        openLB(th.src, th.alt, card?.querySelector(".pj2-caption")?.textContent?.trim()||th.alt||"", card?.querySelector(".pj2-desc")?.textContent?.trim()||"");
-        e.preventDefault(); e.stopPropagation(); return; }
-      const ci=e.target.closest(".pj2-cover-img"); if(ci){ const sec=ci.closest(".pj2-section");
-        openLB(ci.src, ci.alt, sec?.querySelector("h2")?.textContent?.trim()||ci.alt||"", sec?.querySelector(".pj2-hint")?.textContent?.trim()||"");
-        e.preventDefault(); e.stopPropagation(); return; }
-    }, true);
-  }
-})();
+/* Lightbox */
+.pj2-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.65); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 24px; }
+.pj2-lightbox[aria-hidden="false"] { display: flex; }
+.pj2-lightbox-dialog { background: #0b1220; color: #e5e7eb; border-radius: 14px; box-shadow: 0 10px 40px rgba(0,0,0,.45); max-width: min(1100px, 92vw); max-height: 88vh; width: 100%; overflow: hidden; display: grid; grid-template-columns: 1fr 320px; gap: 0; }
+@media (max-width: 900px){ .pj2-lightbox-dialog { grid-template-columns: 1fr; max-height: 92vh; } }
+.pj2-lightbox-media { background: #0f172a; display: flex; align-items: center; justify-content: center; padding: 0; }
+.pj2-lightbox-img { max-width: 100%; max-height: 86vh; height: auto; width: auto; display: block; cursor: zoom-out; }
+.pj2-lightbox-meta { background: #111827; border-left: 1px solid rgba(255,255,255,.06); padding: 16px 16px 20px; display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.pj2-lightbox-title { font-weight: 800; font-size: 16px; color: #f3f4f6; }
+.pj2-lightbox-desc { margin-top: 6px; font-size: 13px; line-height: 1.65; color: #c7d2fe; overflow-y: auto; }
+.pj2-lightbox-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; }
+.pj2-lightbox-close { appearance: none; border: 0; border-radius: 10px; padding: 10px 14px; background: #f9fafb; color: #111827; font-weight: 700; cursor: pointer; }
+.pj2-lightbox-close:hover { background:#e5e7eb; }
+.pj2-lightbox-scrim { position: absolute; inset: 0; }
