@@ -3,33 +3,156 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Project 3 — Collapsible Sections</title>
+  <title>Project 3 — 보안 운영 아카이브 (카드 레이아웃)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-page="project3">
   <header class="pj2-header">
-    <div class="pj2-header-row">
-      <button class="pj2-back-btn" onclick="history.back()" aria-label="이전 페이지로 돌아가기">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        돌아가기
-      </button>
-      <a class="pj2-home-btn" href="main.html" aria-label="메인으로 이동">메인으로</a>
-    </div>
-    <h1>Network / System Security — Project 3</h1>
-    <p>대표 이미지를 눌러 카테고리별 내용을 아래로 펼쳐보세요.</p>
+    <button class="pj2-back-btn" onclick="history.back()" aria-label="이전 페이지로 돌아가기">← 돌아가기</button>
+    <h1>Project 3 — 보안 운영 아카이브</h1>
   </header>
 
-  <section class="pj2-topology" aria-label="네트워크 토폴로지">
-    <img src="pj3/Full-Security-202510.PNG" alt="Full Security Topology" />
-  </section>
+  <main id="pj3-content" class="container">
 
-  <main class="pj2-container" id="pj3-content"></main>
+    <section class="topology-hero" aria-label="네트워크 토폴로지">
+      <figure>
+        <img src="pj3/Full-Security-202510.PNG" alt="전체 토폴로지" loading="eager" decoding="async">
+        <figcaption>전체 토폴로지</figcaption>
+      </figure>
+    </section><section id="pj3-cards" class="pj3-cards" aria-label="프로젝트 카드">
 
-  <noscript style="display:block; text-align:center; color:#b91c1c; margin:16px;">
-    이 페이지는 JavaScript가 필요합니다.
-  </noscript>
+    <article class="pj3-card" data-cat="방화벽 및 gns3">
+      <header class="pj3-card-head">
+        <h2><span class="idx">1.</span> 방화벽 및 gns3</h2>
+        <p class="subtitle">VLAN/접속/SSH/통신 검증 등 네트워크 인프라 구성 및 테스트</p>
+      </header>
+      <figure class="pj3-hero"><img src="pj3/dns서버구축lsh1023.jpg" alt="방화벽 및 gns3 대표 이미지" loading="lazy" decoding="async"><figcaption>칼리에서 dns 서버로 핑가능</figcaption></figure>
+      <footer class="pj3-card-actions">
+        <button class="pj3-toggle" aria-expanded="false" aria-controls="sec-gns3">열어서 보기</button>
+      </footer>
+      <section id="sec-gns3" class="pj3-collapse" hidden><h4 class="subhead">칼리에서 dns 서버로 핑가능</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/dns서버구축lsh1023.jpg" alt="방화벽 및 gns3 — dns서버구축lsh1023.jpg" title="방화벽 및 gns3 — dns서버구축lsh1023.jpg" data-src="pj3/dns서버구축lsh1023.jpg">
+        <div class="image-caption">방화벽 및 gns3 — dns서버구축lsh1023.jpg</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/칼리에서 dns 서버로 핑가능.PNG" alt="방화벽 및 gns3 — 칼리에서 dns 서버로 핑가능.PNG" title="방화벽 및 gns3 — 칼리에서 dns 서버로 핑가능.PNG" data-src="pj3/칼리에서 dns 서버로 핑가능.PNG">
+        <div class="image-caption">방화벽 및 gns3 — 칼리에서 dns 서버로 핑가능.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/칼리에서 owasp로 핑차단.PNG" alt="방화벽 및 gns3 — 칼리에서 owasp로 핑차단.PNG" title="방화벽 및 gns3 — 칼리에서 owasp로 핑차단.PNG" data-src="pj3/칼리에서 owasp로 핑차단.PNG">
+        <div class="image-caption">방화벽 및 gns3 — 칼리에서 owasp로 핑차단.PNG</div>
+      </div></div><h4 class="subhead">칼리에서 owasp로 핑차단</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/칼리에서 dns 서버로 핑가능.PNG" alt="방화벽 및 gns3 — 칼리에서 dns 서버로 핑가능.PNG" title="방화벽 및 gns3 — 칼리에서 dns 서버로 핑가능.PNG" data-src="pj3/칼리에서 dns 서버로 핑가능.PNG">
+        <div class="image-caption">방화벽 및 gns3 — 칼리에서 dns 서버로 핑가능.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/칼리에서 owasp로 핑차단.PNG" alt="방화벽 및 gns3 — 칼리에서 owasp로 핑차단.PNG" title="방화벽 및 gns3 — 칼리에서 owasp로 핑차단.PNG" data-src="pj3/칼리에서 owasp로 핑차단.PNG">
+        <div class="image-caption">방화벽 및 gns3 — 칼리에서 owasp로 핑차단.PNG</div>
+      </div></div><h4 class="subhead">vlansetting</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/vlansetting.PNG" alt="방화벽 및 gns3 — vlansetting.PNG" title="방화벽 및 gns3 — vlansetting.PNG" data-src="pj3/vlansetting.PNG">
+        <div class="image-caption">방화벽 및 gns3 — vlansetting.PNG</div>
+      </div></div></section>
+    </article>
+    
 
-  <script>window.PJ3_SECTIONS_OVERRIDE = [{"title": "1. GNS3에서 설정", "hint": "GNS3 기본 구성과 통신 검증", "items": [{"file": "vlansetting.PNG", "alt": "vlansetting", "desc": ""}, {"file": "telnet ╟π┐δ.png", "alt": "telnet허용", "desc": ""}, {"file": "dns╝¡╣÷▒╕├αlsh1023.jpg", "alt": "dns에서 인사이드로 핑", "desc": ""}]}, {"title": "2. OWASP JUICE SHOP", "hint": "별점 과제 진행 기록", "items": [{"file": "2star.PNG", "alt": "2star", "desc": ""}, {"file": "3star.PNG", "alt": "3star", "desc": ""}, {"file": "4star.PNG", "alt": "4star", "desc": ""}]}, {"title": "3. 서버 구축", "hint": "로그/모니터링/보안 서버 구성", "items": [{"file": "goaccess.PNG", "alt": "goaccess", "desc": ""}, {"file": "goaccessweb.PNG", "alt": "goaccessweb", "desc": ""}, {"file": "NMS-Zabbix.PNG", "alt": "NMS-Zabbix", "desc": ""}, {"file": "ossec▒╕├α.PNG", "alt": "ossec구축", "desc": ""}, {"file": "PMM╝¡╣÷▒╕├α.PNG", "alt": "PMM서버구축", "desc": ""}, {"file": "suricata╝│─í╣╫ ╡┐└█.PNG", "alt": "suricata 설치및동작", "desc": ""}, {"file": "WAF▒╕├α.PNG", "alt": "WAF구축", "desc": ""}, {"file": "wazuh.PNG", "alt": "wazuh", "desc": ""}, {"file": "와즈설치.png", "alt": "와즈설치", "desc": ""}, {"file": "와즈설치완.png", "alt": "와즈설치완", "desc": ""}]}];</script>
+    <article class="pj3-card" data-cat="서버 구축 및 테스트">
+      <header class="pj3-card-head">
+        <h2><span class="idx">2.</span> 서버 구축 및 테스트</h2>
+        <p class="subtitle">DNS/FTP/NFS/OSSEC/PMM/SMB/Zabbix/로그 등 서버·모니터링 구성</p>
+      </header>
+      <figure class="pj3-hero"><img src="pj3/goaccessweb.PNG" alt="서버 구축 및 테스트 대표 이미지" loading="lazy" decoding="async"><figcaption>goaccessweb</figcaption></figure>
+      <footer class="pj3-card-actions">
+        <button class="pj3-toggle" aria-expanded="false" aria-controls="sec-sec">열어서 보기</button>
+      </footer>
+      <section id="sec-sec" class="pj3-collapse" hidden><h4 class="subhead">goaccessweb</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/goaccessweb.PNG" alt="서버 구축 및 테스트 — goaccessweb.PNG" title="서버 구축 및 테스트 — goaccessweb.PNG" data-src="pj3/goaccessweb.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — goaccessweb.PNG</div>
+      </div></div><h4 class="subhead">goaccess</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/goaccess.PNG" alt="서버 구축 및 테스트 — goaccess.PNG" title="서버 구축 및 테스트 — goaccess.PNG" data-src="pj3/goaccess.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — goaccess.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/goaccessweb.PNG" alt="서버 구축 및 테스트 — goaccessweb.PNG" title="서버 구축 및 테스트 — goaccessweb.PNG" data-src="pj3/goaccessweb.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — goaccessweb.PNG</div>
+      </div></div><h4 class="subhead">ossec구축</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/ossec구축.PNG" alt="서버 구축 및 테스트 — ossec구축.PNG" title="서버 구축 및 테스트 — ossec구축.PNG" data-src="pj3/ossec구축.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — ossec구축.PNG</div>
+      </div></div><h4 class="subhead">wazuh</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/wazuh.PNG" alt="서버 구축 및 테스트 — wazuh.PNG" title="서버 구축 및 테스트 — wazuh.PNG" data-src="pj3/wazuh.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — wazuh.PNG</div>
+      </div></div><h4 class="subhead">WAF구축</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/WAF구축.PNG" alt="서버 구축 및 테스트 — WAF구축.PNG" title="서버 구축 및 테스트 — WAF구축.PNG" data-src="pj3/WAF구축.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — WAF구축.PNG</div>
+      </div></div><h4 class="subhead">suricat 설치 및 동작</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/suricata설치및 동작.PNG" alt="서버 구축 및 테스트 — suricata설치및 동작.PNG" title="서버 구축 및 테스트 — suricata설치및 동작.PNG" data-src="pj3/suricata설치및 동작.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — suricata설치및 동작.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/와즈 설치.PNG" alt="서버 구축 및 테스트 — 와즈 설치.PNG" title="서버 구축 및 테스트 — 와즈 설치.PNG" data-src="pj3/와즈 설치.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — 와즈 설치.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/와즈 설치완.PNG" alt="서버 구축 및 테스트 — 와즈 설치완.PNG" title="서버 구축 및 테스트 — 와즈 설치완.PNG" data-src="pj3/와즈 설치완.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — 와즈 설치완.PNG</div>
+      </div></div><h4 class="subhead">PMM 서버 구축</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/PMM서버구축.PNG" alt="서버 구축 및 테스트 — PMM서버구축.PNG" title="서버 구축 및 테스트 — PMM서버구축.PNG" data-src="pj3/PMM서버구축.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — PMM서버구축.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/WAF구축.PNG" alt="서버 구축 및 테스트 — WAF구축.PNG" title="서버 구축 및 테스트 — WAF구축.PNG" data-src="pj3/WAF구축.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — WAF구축.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/dns서버구축lsh1023.jpg" alt="서버 구축 및 테스트 — dns서버구축lsh1023.jpg" title="서버 구축 및 테스트 — dns서버구축lsh1023.jpg" data-src="pj3/dns서버구축lsh1023.jpg">
+        <div class="image-caption">서버 구축 및 테스트 — dns서버구축lsh1023.jpg</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/ossec구축.PNG" alt="서버 구축 및 테스트 — ossec구축.PNG" title="서버 구축 및 테스트 — ossec구축.PNG" data-src="pj3/ossec구축.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — ossec구축.PNG</div>
+      </div>
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/칼리에서 dns 서버로 핑가능.PNG" alt="서버 구축 및 테스트 — 칼리에서 dns 서버로 핑가능.PNG" title="서버 구축 및 테스트 — 칼리에서 dns 서버로 핑가능.PNG" data-src="pj3/칼리에서 dns 서버로 핑가능.PNG">
+        <div class="image-caption">서버 구축 및 테스트 — 칼리에서 dns 서버로 핑가능.PNG</div>
+      </div></div></section>
+    </article>
+    
+
+    <article class="pj3-card" data-cat="OWASP Juice-shop">
+      <header class="pj3-card-head">
+        <h2><span class="idx">3.</span> OWASP Juice-shop</h2>
+        <p class="subtitle">취약점 실습(학습/로그 확인/테스트 시나리오)</p>
+      </header>
+      <figure class="pj3-hero"><img src="pj3/2starjuice.PNG" alt="OWASP Juice-shop 대표 이미지" loading="lazy" decoding="async"><figcaption>2starjuice</figcaption></figure>
+      <footer class="pj3-card-actions">
+        <button class="pj3-toggle" aria-expanded="false" aria-controls="sec-OWASP-Juice-shop">열어서 보기</button>
+      </footer>
+      <section id="sec-OWASP-Juice-shop" class="pj3-collapse" hidden><h4 class="subhead">2starjuice</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/2starjuice.PNG" alt="OWASP Juice-shop — 2starjuice.PNG" title="OWASP Juice-shop — 2starjuice.PNG" data-src="pj3/2starjuice.PNG">
+        <div class="image-caption">OWASP Juice-shop — 2starjuice.PNG</div>
+      </div></div><h4 class="subhead">juiceshop</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/juiceshop.PNG" alt="OWASP Juice-shop — juiceshop.PNG" title="OWASP Juice-shop — juiceshop.PNG" data-src="pj3/juiceshop.PNG">
+        <div class="image-caption">OWASP Juice-shop — juiceshop.PNG</div>
+      </div></div><h4 class="subhead">쥬스샵 accesslog</h4><div class="gallery">
+      <div class="gallery-item">
+        <img loading="lazy" decoding="async" src="pj3/쥬스샵accesslog.PNG" alt="OWASP Juice-shop — 쥬스샵accesslog.PNG" title="OWASP Juice-shop — 쥬스샵accesslog.PNG" data-src="pj3/쥬스샵accesslog.PNG">
+        <div class="image-caption">OWASP Juice-shop — 쥬스샵accesslog.PNG</div>
+      </div></div></section>
+    </article>
+    
+</section>
   <script src="script.js" defer></script>
+</main>
 </body>
 </html>
